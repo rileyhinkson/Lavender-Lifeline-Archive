@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lavender Lifeline Archive</title>
+  <meta name="description" content="An independently operated digital archive preserving transgender healthcare research and HIV/AIDS medical literature — built to outlast the political moment." />
+  <meta property="og:title" content="Lavender Lifeline Archive" />
+  <meta property="og:description" content="This is not a lab for gaming servers. This is a lab with the hope to protect life-saving research." />
+  <meta property="og:type" content="website" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --lav-50:  #f5f0ff;
+      --lav-100: #e8d5ff;
+      --lav-200: #d4b0ff;
+      --lav-400: #a855f7;
+      --lav-600: #7c3aed;
+      --lav-800: #4c1d95;
+      --trans-blue:  #55cdfc;
+      --trans-pink:  #f7a8b8;
+      --trans-white: #ffffff;
+      --pride-red:    #e40303;
+      --pride-orange: #ff8c00;
+      --pride-yellow: #ffed00;
+      --pride-green:  #008026;
+      --pride-blue:   #004dff;
+      --pride-purple: #750787;
+      --text:      #1a1a2e;
+      --text-mid:  #555;
+      --text-soft: #777;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      background: #fff;
+    }
+
+    /* ── Pride & Trans bars ── */
+    .pride-bar {
+      height: 6px;
+      display: flex;
+    }
+    .pride-bar span, .trans-bar span { flex: 1; }
+    .trans-bar {
+      height: 4px;
+      display: flex;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 2rem;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--lav-100);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--lav-800);
+      text-decoration: none;
+    }
+    .nav-logo .flower {
+      width: 30px;
+      height: 30px;
+      background: var(--lav-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--lav-600);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--lav-800); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(160deg, var(--lav-50) 0%, #fff5fb 50%, #f0f9ff 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--lav-100);
+      color: var(--lav-800);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      color: var(--lav-800);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--lav-600); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      max-width: 520px;
+      margin: 0 auto 2.25rem;
+      line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--lav-600);
+      color: #fff;
+      border: none;
+      padding: 11px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--lav-800); }
+    .btn-secondary {
+      background: #fff;
+      color: var(--lav-600);
+      border: 1.5px solid var(--lav-200);
+      padding: 11px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--lav-400); }
+
+    /* ── Mission strip ── */
+    .mission-strip {
+      background: var(--lav-800);
+      color: #fff;
+      padding: 2rem 2rem;
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.75;
+    }
+    .mission-strip em {
+      display: block;
+      font-style: normal;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lav-200);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Pillars ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      padding: 2.5rem 2rem;
+      background: var(--lav-50);
+      border-top: 0.5px solid var(--lav-100);
+      border-bottom: 0.5px solid var(--lav-100);
+    }
+    .pillar {
+      background: #fff;
+      border: 0.5px solid var(--lav-100);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .pillar-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      font-size: 19px;
+    }
+    .pillar h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--lav-800);
+      margin-bottom: 0.4rem;
+    }
+    .pillar p {
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    /* ── Story section ── */
+    .section {
+      padding: 3.5rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--lav-400);
+      margin-bottom: 0.5rem;
+    }
+    .section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--lav-800);
+      margin-bottom: 1.25rem;
+      line-height: 1.3;
+    }
+    .section p {
+      font-size: 0.975rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .quote-block {
+      border-left: 3px solid var(--lav-400);
+      padding: 1.1rem 1.5rem;
+      margin: 1.75rem 0;
+      background: var(--lav-50);
+      border-radius: 0 10px 10px 0;
+    }
+    .quote-block p {
+      font-size: 1.05rem;
+      color: var(--lav-800);
+      line-height: 1.8;
+      font-style: italic;
+      margin: 0;
+    }
+    .quote-block p + p { margin-top: 0.75rem; }
+
+    /* ── Status bar ── */
+    .status-bar {
+      background: #fff;
+      border-top: 0.5px solid var(--lav-100);
+      border-bottom: 0.5px solid var(--lav-100);
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #666;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-green  { background: #22c55e; }
+    .dot-yellow { background: #eab308; }
+    .dot-lav    { background: var(--lav-400); }
+
+    /* ── CTA ── */
+    .cta {
+      background: linear-gradient(135deg, var(--lav-800), var(--lav-600));
+      color: #fff;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .cta h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .cta p {
+      font-size: 0.95rem;
+      opacity: 0.88;
+      max-width: 460px;
+      margin: 0 auto 1.75rem;
+      line-height: 1.75;
+    }
+    .btn-white {
+      background: #fff;
+      color: var(--lav-800);
+      border: none;
+      padding: 11px 30px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 1.75rem 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      border-top: 0.5px solid var(--lav-100);
+      line-height: 2;
+    }
+    footer a { color: var(--lav-400); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .pillars { padding: 1.5rem 1rem; }
+      .section { padding: 2.5rem 1.25rem; }
+      .status-bar { gap: 1rem; padding: 1rem; }
+      .cta { padding: 2.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pride bar top -->
+  <div class="pride-bar" aria-hidden="true">
+    <span style="background:var(--pride-red)"></span>
+    <span style="background:var(--pride-orange)"></span>
+    <span style="background:var(--pride-yellow)"></span>
+    <span style="background:var(--pride-green)"></span>
+    <span style="background:var(--pride-blue)"></span>
+    <span style="background:var(--pride-purple)"></span>
+  </div>
+  <div class="trans-bar" aria-hidden="true">
+    <span style="background:var(--trans-blue)"></span>
+    <span style="background:var(--trans-pink)"></span>
+    <span style="background:var(--trans-white)"></span>
+    <span style="background:var(--trans-pink)"></span>
+    <span style="background:var(--trans-blue)"></span>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="flower">🪻</div>
+      Lavender Lifeline Archive
+    </a>
+    <ul class="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="#story">About</a></li>
+      <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="mission">
+    <div class="hero-badge">Community Infrastructure Project</div>
+    <h1>The research belongs<br>to <span>the community.</span></h1>
+    <p class="hero-sub">
+      An independently operated digital archive preserving transgender healthcare
+      research and HIV/AIDS medical literature — built to outlast the political
+      moment we're living through.
+    </p>
+    <div class="hero-actions">
+      <a href="#archive" class="btn-primary">Explore the archive</a>
+      <a href="https://github.com" target="_blank" rel="noopener" class="btn-secondary">Follow on GitHub</a>
+    </div>
+  </section>
+
+  <!-- Mission strip -->
+  <div class="mission-strip">
+    <em>Our mission</em>
+    This is not a lab for gaming servers.<br>
+    This is a lab with the hope to protect life-saving research.
+  </div>
+
+  <!-- Pillars -->
+  <div class="pillars" id="archive">
+    <div class="pillar">
+      <div class="pillar-icon" style="background:#f5f0ff;">🏳️‍⚧️</div>
+      <h3>Trans health research</h3>
+      <p>HRT protocols, transition outcomes, endocrinology literature — preserved and accessible.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:#fff0f5;">🩸</div>
+      <h3>HIV/AIDS literature</h3>
+      <p>Antiretroviral data, PrEP research, epidemiology, and historical epidemic documentation.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:#f0f9ff;">🔒</div>
+      <h3>Sovereign infrastructure</h3>
+      <p>Real hardware. ZFS redundancy. Encrypted backups. No cloud dependency, no corporate control.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon" style="background:#f0fff4;">🌐</div>
+      <h3>Open access</h3>
+      <p>Built in public, documented openly. Community-driven and free to access.</p>
+    </div>
+  </div>
+
+  <!-- Story -->
+  <section class="section" id="story">
+    <div class="section-label">Our story</div>
+    <h2>Built in a bedroom rack,<br>maintained with community in mind</h2>
+    <div class="quote-block">
+      <p>This is not a lab for gaming servers. This is a lab with the hope to protect life-saving research.</p>
+      <p>Built in a bedroom rack, maintained with community in mind — because the internet forgets, institutions fail, and some of us can't afford to lose this information.</p>
+    </div>
+    <p>
+      The Lavender Lifeline Archive was started by a trans technologist who watched
+      institutions deprioritize, defund, and quietly delete the research that keeps
+      marginalized people alive and informed.
+    </p>
+    <p>
+      This is for anyone who has ever needed medical information and found the link
+      broken, the study paywalled, or the organization defunded. The archive is being
+      built in public. Follow along.
+    </p>
+  </section>
+
+  <!-- Live status -->
+  <div class="status-bar">
+    <div class="status-item">
+      <div class="status-dot dot-green"></div>Venus pool — online
+    </div>
+    <div class="status-item">
+      <div class="status-dot dot-green"></div>Terra replication — active
+    </div>
+    <div class="status-item">
+      <div class="status-dot dot-lav"></div>Archive — seeding
+    </div>
+    <div class="status-item">
+      <div class="status-dot dot-yellow"></div>OPNsense — pending
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Help keep the archive alive</h2>
+    <p>
+      Follow the project, share the mission, contribute research sources, or support
+      the infrastructure. Every share gets this in front of someone who needs it.
+    </p>
+    <a href="https://github.com" target="_blank" rel="noopener" class="btn-white">Get involved</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      🪻 Lavender Lifeline Archive — Community Infrastructure Project
+      &nbsp;|&nbsp;
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      &nbsp;|&nbsp;
+      Built with intention, maintained with community in mind
+    </p>
+    <p style="margin-top:0.4rem; font-size:11px; color:#bbb;">
+      Preserving transgender healthcare research &amp; HIV/AIDS medical literature
+    </p>
+  </footer>
+
+  <!-- Trans & Pride bar bottom -->
+  <div class="trans-bar" aria-hidden="true">
+    <span style="background:var(--trans-blue)"></span>
+    <span style="background:var(--trans-pink)"></span>
+    <span style="background:var(--trans-white)"></span>
+    <span style="background:var(--trans-pink)"></span>
+    <span style="background:var(--trans-blue)"></span>
+  </div>
+  <div class="pride-bar" aria-hidden="true">
+    <span style="background:var(--pride-red)"></span>
+    <span style="background:var(--pride-orange)"></span>
+    <span style="background:var(--pride-yellow)"></span>
+    <span style="background:var(--pride-green)"></span>
+    <span style="background:var(--pride-blue)"></span>
+    <span style="background:var(--pride-purple)"></span>
+  </div>
+
+</body>
+</html>
