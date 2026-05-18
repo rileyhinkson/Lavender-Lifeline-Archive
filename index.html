@@ -43,15 +43,9 @@
     }
 
     /* ── Pride & Trans bars ── */
-    .pride-bar {
-      height: 6px;
-      display: flex;
-    }
+    .pride-bar { height: 6px; display: flex; }
     .pride-bar span, .trans-bar span { flex: 1; }
-    .trans-bar {
-      height: 4px;
-      display: flex;
-    }
+    .trans-bar { height: 4px; display: flex; }
 
     /* ── Nav ── */
     nav {
@@ -76,26 +70,16 @@
       text-decoration: none;
     }
     .nav-logo .flower {
-      width: 30px;
-      height: 30px;
+      width: 30px; height: 30px;
       background: var(--lav-100);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 17px;
     }
-    .nav-links {
-      display: flex;
-      gap: 1.75rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
     .nav-links a {
-      font-size: 13px;
-      color: var(--lav-600);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
+      font-size: 13px; color: var(--lav-600); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--lav-800); }
 
@@ -107,190 +91,225 @@
     }
     .hero-badge {
       display: inline-block;
-      background: var(--lav-100);
-      color: var(--lav-800);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
+      background: var(--lav-100); color: var(--lav-800);
+      font-size: 11px; font-weight: 600;
+      padding: 4px 14px; border-radius: 20px;
+      margin-bottom: 1.5rem; letter-spacing: 0.07em; text-transform: uppercase;
     }
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 2.75rem);
-      font-weight: 700;
-      color: var(--lav-800);
-      line-height: 1.2;
-      margin-bottom: 1.25rem;
+      font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700;
+      color: var(--lav-800); line-height: 1.2; margin-bottom: 1.25rem;
     }
     .hero h1 span { color: var(--lav-600); }
     .hero-sub {
-      font-size: 1.05rem;
-      color: var(--text-mid);
-      max-width: 520px;
-      margin: 0 auto 2.25rem;
-      line-height: 1.8;
+      font-size: 1.05rem; color: var(--text-mid);
+      max-width: 520px; margin: 0 auto 2.25rem; line-height: 1.8;
     }
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
-      background: var(--lav-600);
-      color: #fff;
-      border: none;
-      padding: 11px 28px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s;
+      background: var(--lav-600); color: #fff; border: none;
+      padding: 11px 28px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s;
     }
     .btn-primary:hover { background: var(--lav-800); }
     .btn-secondary {
-      background: #fff;
-      color: var(--lav-600);
-      border: 1.5px solid var(--lav-200);
-      padding: 11px 28px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: border-color 0.2s;
+      background: #fff; color: var(--lav-600); border: 1.5px solid var(--lav-200);
+      padding: 11px 28px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s;
     }
     .btn-secondary:hover { border-color: var(--lav-400); }
 
     /* ── Mission strip ── */
     .mission-strip {
-      background: var(--lav-800);
-      color: #fff;
-      padding: 2rem 2rem;
-      text-align: center;
-      font-size: 1.1rem;
-      line-height: 1.75;
+      background: var(--lav-800); color: #fff;
+      padding: 2rem; text-align: center;
+      font-size: 1.1rem; line-height: 1.75;
     }
     .mission-strip em {
-      display: block;
-      font-style: normal;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--lav-200);
-      margin-bottom: 0.5rem;
+      display: block; font-style: normal;
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lav-200); margin-bottom: 0.5rem;
     }
 
     /* ── Pillars ── */
     .pillars {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      padding: 2.5rem 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem; padding: 2.5rem 2rem;
       background: var(--lav-50);
       border-top: 0.5px solid var(--lav-100);
       border-bottom: 0.5px solid var(--lav-100);
     }
     .pillar {
-      background: #fff;
-      border: 0.5px solid var(--lav-100);
-      border-radius: 12px;
-      padding: 1.25rem;
+      background: #fff; border: 0.5px solid var(--lav-100);
+      border-radius: 12px; padding: 1.25rem;
     }
     .pillar-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.75rem;
-      font-size: 19px;
+      width: 38px; height: 38px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.75rem; font-size: 19px;
     }
-    .pillar h3 {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--lav-800);
-      margin-bottom: 0.4rem;
-    }
-    .pillar p {
-      font-size: 12px;
-      color: var(--text-soft);
-      line-height: 1.6;
-    }
+    .pillar h3 { font-size: 13px; font-weight: 600; color: var(--lav-800); margin-bottom: 0.4rem; }
+    .pillar p { font-size: 12px; color: var(--text-soft); line-height: 1.6; }
 
-    /* ── Story section ── */
-    .section {
+    /* ── Archive section ── */
+    .archive-section {
       padding: 3.5rem 2rem;
-      max-width: 700px;
-      margin: 0 auto;
+      background: #fff;
+      border-bottom: 0.5px solid var(--lav-100);
     }
-    .section-label {
+    .archive-inner { max-width: 860px; margin: 0 auto; }
+    .archive-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .archive-header-text {}
+    .archive-section .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--lav-400); margin-bottom: 0.4rem;
+    }
+    .archive-section h2 {
+      font-size: 1.5rem; font-weight: 700; color: var(--lav-800); line-height: 1.3;
+    }
+    .archive-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.09em;
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--lav-400);
-      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .section h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--lav-800);
-      margin-bottom: 1.25rem;
-      line-height: 1.3;
+    .archive-status-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #f59e0b;
+      animation: pulse-amber 2s infinite;
     }
-    .section p {
-      font-size: 0.975rem;
-      color: var(--text-mid);
-      line-height: 1.85;
+    @keyframes pulse-amber {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* Category grid */
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--lav-100);
+      border: 1px solid var(--lav-100);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+    }
+    .archive-category {
+      background: #fff;
+      padding: 1.5rem;
+      position: relative;
+    }
+    .archive-category:hover { background: var(--lav-50); }
+    .cat-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 0.85rem;
+    }
+    .cat-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+    .cat-title {
+      font-size: 13px; font-weight: 600; color: var(--lav-800); line-height: 1.3;
+    }
+    .cat-subtitle {
+      font-size: 11px; color: var(--text-soft); margin-top: 1px;
+    }
+    .cat-topics {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 5px;
       margin-bottom: 1rem;
     }
-    .quote-block {
-      border-left: 3px solid var(--lav-400);
-      padding: 1.1rem 1.5rem;
-      margin: 1.75rem 0;
+    .cat-topics li {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; color: var(--text-mid);
+    }
+    .cat-topics li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--lav-200);
+      flex-shrink: 0;
+    }
+    .cat-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--lav-100);
+    }
+    .cat-count {
+      font-size: 11px; color: var(--text-soft);
+    }
+    .cat-tag {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 10px;
+    }
+    .tag-seeding { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+    .tag-building { background: var(--lav-50); color: var(--lav-600); border: 1px solid var(--lav-100); }
+    .tag-planned  { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+
+    /* Progress note */
+    .archive-note {
+      display: flex;
+      gap: 12px;
       background: var(--lav-50);
+      border: 1px solid var(--lav-100);
+      border-left: 3px solid var(--lav-400);
       border-radius: 0 10px 10px 0;
+      padding: 1.1rem 1.25rem;
+      align-items: flex-start;
+    }
+    .archive-note-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .archive-note-text { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
+    .archive-note-text strong { color: var(--lav-800); }
+
+    /* ── Story section ── */
+    .section { padding: 3.5rem 2rem; max-width: 700px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--lav-400); margin-bottom: 0.5rem;
+    }
+    .section h2 {
+      font-size: 1.5rem; font-weight: 700; color: var(--lav-800);
+      margin-bottom: 1.25rem; line-height: 1.3;
+    }
+    .section p { font-size: 0.975rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 1rem; }
+    .quote-block {
+      border-left: 3px solid var(--lav-400); padding: 1.1rem 1.5rem;
+      margin: 1.75rem 0; background: var(--lav-50); border-radius: 0 10px 10px 0;
     }
     .quote-block p {
-      font-size: 1.05rem;
-      color: var(--lav-800);
-      line-height: 1.8;
-      font-style: italic;
-      margin: 0;
+      font-size: 1.05rem; color: var(--lav-800); line-height: 1.8;
+      font-style: italic; margin: 0;
     }
     .quote-block p + p { margin-top: 0.75rem; }
 
     /* ── Status bar ── */
     .status-bar {
-      background: #fff;
-      border-top: 0.5px solid var(--lav-100);
+      background: #fff; border-top: 0.5px solid var(--lav-100);
       border-bottom: 0.5px solid var(--lav-100);
-      padding: 1rem 2rem;
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
+      padding: 1rem 2rem; display: flex; gap: 2rem;
+      justify-content: center; flex-wrap: wrap;
     }
-    .status-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: #666;
-    }
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .status-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #666; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .dot-green  { background: #22c55e; }
     .dot-yellow { background: #eab308; }
     .dot-lav    { background: var(--lav-400); }
@@ -298,45 +317,22 @@
     /* ── CTA ── */
     .cta {
       background: linear-gradient(135deg, var(--lav-800), var(--lav-600));
-      color: #fff;
-      padding: 3.5rem 2rem;
-      text-align: center;
+      color: #fff; padding: 3.5rem 2rem; text-align: center;
     }
-    .cta h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .cta p {
-      font-size: 0.95rem;
-      opacity: 0.88;
-      max-width: 460px;
-      margin: 0 auto 1.75rem;
-      line-height: 1.75;
-    }
+    .cta h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .cta p { font-size: 0.95rem; opacity: 0.88; max-width: 460px; margin: 0 auto 1.75rem; line-height: 1.75; }
     .btn-white {
-      background: #fff;
-      color: var(--lav-800);
-      border: none;
-      padding: 11px 30px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: opacity 0.2s;
+      background: #fff; color: var(--lav-800); border: none;
+      padding: 11px 30px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s;
     }
     .btn-white:hover { opacity: 0.9; }
 
     /* ── Footer ── */
     footer {
-      padding: 1.75rem 2rem;
-      text-align: center;
-      font-size: 12px;
-      color: #999;
-      border-top: 0.5px solid var(--lav-100);
-      line-height: 2;
+      padding: 1.75rem 2rem; text-align: center;
+      font-size: 12px; color: #999;
+      border-top: 0.5px solid var(--lav-100); line-height: 2;
     }
     footer a { color: var(--lav-400); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
@@ -350,6 +346,8 @@
       .section { padding: 2.5rem 1.25rem; }
       .status-bar { gap: 1rem; padding: 1rem; }
       .cta { padding: 2.5rem 1.25rem; }
+      .archive-section { padding: 2.5rem 1rem; }
+      .archive-header { flex-direction: column; }
     }
   </style>
 </head>
@@ -382,7 +380,7 @@
       <li><a href="#mission">Mission</a></li>
       <li><a href="#archive">Archive</a></li>
       <li><a href="#story">About</a></li>
-      <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
   </nav>
 
@@ -397,7 +395,7 @@
     </p>
     <div class="hero-actions">
       <a href="#archive" class="btn-primary">Explore the archive</a>
-      <a href="https://github.com" target="_blank" rel="noopener" class="btn-secondary">Follow on GitHub</a>
+      <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener" class="btn-secondary">Follow on GitHub</a>
     </div>
   </section>
 
@@ -410,7 +408,7 @@
   </div>
 
   <!-- Pillars -->
-  <div class="pillars" id="archive">
+  <div class="pillars">
     <div class="pillar">
       <div class="pillar-icon" style="background:#f5f0ff;">🏳️‍⚧️</div>
       <h3>Trans health research</h3>
@@ -432,6 +430,121 @@
       <p>Built in public, documented openly. Community-driven and free to access.</p>
     </div>
   </div>
+
+  <!-- ══ ARCHIVE SECTION ══ -->
+  <section class="archive-section" id="archive">
+    <div class="archive-inner">
+
+      <div class="archive-header">
+        <div class="archive-header-text">
+          <div class="section-label">Archive</div>
+          <h2>The collection is taking shape</h2>
+        </div>
+        <div class="archive-status-badge">Structure being built</div>
+      </div>
+
+      <div class="archive-grid">
+
+        <!-- Trans Health -->
+        <div class="archive-category">
+          <div class="cat-header">
+            <div class="cat-icon" style="background:#f5f0ff;">🏳️‍⚧️</div>
+            <div>
+              <div class="cat-title">Transgender Healthcare</div>
+              <div class="cat-subtitle">HRT, outcomes, endocrinology</div>
+            </div>
+          </div>
+          <ul class="cat-topics">
+            <li>Hormone therapy protocols & dosing literature</li>
+            <li>Long-term transition outcomes research</li>
+            <li>Endocrinology & reproductive health studies</li>
+            <li>Mental health & gender dysphoria research</li>
+            <li>Surgical outcomes & aftercare documentation</li>
+          </ul>
+          <div class="cat-footer">
+            <span class="cat-count">Seeding sources</span>
+            <span class="cat-tag tag-seeding">Seeding</span>
+          </div>
+        </div>
+
+        <!-- HIV/AIDS -->
+        <div class="archive-category">
+          <div class="cat-header">
+            <div class="cat-icon" style="background:#fff0f5;">🩸</div>
+            <div>
+              <div class="cat-title">HIV/AIDS Literature</div>
+              <div class="cat-subtitle">ART, PrEP, epidemiology, history</div>
+            </div>
+          </div>
+          <ul class="cat-topics">
+            <li>Antiretroviral therapy research & protocols</li>
+            <li>PrEP & PEP efficacy studies</li>
+            <li>Epidemic history & community documentation</li>
+            <li>Epidemiology & transmission data</li>
+            <li>Long-term survivor health outcomes</li>
+          </ul>
+          <div class="cat-footer">
+            <span class="cat-count">Seeding sources</span>
+            <span class="cat-tag tag-seeding">Seeding</span>
+          </div>
+        </div>
+
+        <!-- Community Health -->
+        <div class="archive-category">
+          <div class="cat-header">
+            <div class="cat-icon" style="background:#f0fff4;">🫂</div>
+            <div>
+              <div class="cat-title">LGBTQ+ Community Health</div>
+              <div class="cat-subtitle">Mental health, harm reduction, advocacy</div>
+            </div>
+          </div>
+          <ul class="cat-topics">
+            <li>Queer mental health research</li>
+            <li>Harm reduction & substance use literature</li>
+            <li>Healthcare access barriers & policy research</li>
+            <li>Advocacy organization publications</li>
+          </ul>
+          <div class="cat-footer">
+            <span class="cat-count">Building category</span>
+            <span class="cat-tag tag-building">In Progress</span>
+          </div>
+        </div>
+
+        <!-- Historical -->
+        <div class="archive-category">
+          <div class="cat-header">
+            <div class="cat-icon" style="background:#fefce8;">📜</div>
+            <div>
+              <div class="cat-title">Historical Documentation</div>
+              <div class="cat-subtitle">Defunded orgs, retracted studies, archival materials</div>
+            </div>
+          </div>
+          <ul class="cat-topics">
+            <li>Defunded organization records & publications</li>
+            <li>Retracted-but-valid research preservation</li>
+            <li>Government health agency historical data</li>
+            <li>Activist & movement documentation</li>
+          </ul>
+          <div class="cat-footer">
+            <span class="cat-count">Planned</span>
+            <span class="cat-tag tag-planned">Planned</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Informational note -->
+      <div class="archive-note">
+        <div class="archive-note-icon">🪻</div>
+        <div class="archive-note-text">
+          <strong>The archive structure is being built.</strong> Categories and ingestion pipelines are actively in development on sovereign, ZFS-redundant hardware. Public browsing and search will come online as the collection grows.
+          Have research to contribute? <a href="mailto:rileyhinkson@gmail.com" style="color:var(--lav-600); font-weight:600;">Reach out directly</a> or
+          <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener" style="color:var(--lav-600); font-weight:600;">open an issue on GitHub</a>.
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- Story -->
   <section class="section" id="story">
@@ -502,14 +615,10 @@
     </p>
     <a href="mailto:rileyhinkson@gmail.com" style="
       display: inline-block;
-      background: var(--lav-50);
-      color: var(--lav-600);
+      background: var(--lav-50); color: var(--lav-600);
       border: 1.5px solid var(--lav-200);
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
+      padding: 10px 24px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
     ">rileyhinkson@gmail.com</a>
   </section>
 
