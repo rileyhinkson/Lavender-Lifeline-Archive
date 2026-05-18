@@ -166,7 +166,6 @@
       gap: 1rem;
       margin-bottom: 2rem;
     }
-    .archive-header-text {}
     .archive-section .section-label {
       font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
       text-transform: uppercase; color: var(--lav-400); margin-bottom: 0.4rem;
@@ -202,10 +201,10 @@
       50% { opacity: 0.35; }
     }
 
-    /* Category grid */
-    .archive-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    /* Category accordion layout */
+    .archive-categories {
+      display: flex;
+      flex-direction: column;
       gap: 1px;
       background: var(--lav-100);
       border: 1px solid var(--lav-100);
@@ -215,47 +214,36 @@
     }
     .archive-category {
       background: #fff;
-      padding: 1.5rem;
-      position: relative;
     }
-    .archive-category:hover { background: var(--lav-50); }
-    .cat-header {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 0.85rem;
+    .cat-header-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
     }
+    .cat-header-row:hover { background: var(--lav-50); }
     .cat-icon {
-      width: 34px; height: 34px; border-radius: 8px;
+      width: 36px; height: 36px; border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       font-size: 17px; flex-shrink: 0;
     }
+    .cat-header-text { flex: 1; }
     .cat-title {
       font-size: 13px; font-weight: 600; color: var(--lav-800); line-height: 1.3;
     }
     .cat-subtitle {
-      font-size: 11px; color: var(--text-soft); margin-top: 1px;
+      font-size: 11px; color: var(--text-soft); margin-top: 2px;
     }
-    .cat-topics {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 5px;
-      margin-bottom: 1rem;
+    .cat-meta {
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
     }
-    .cat-topics li {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 12px; color: var(--text-mid);
-    }
-    .cat-topics li::before {
-      content: '';
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--lav-200);
-      flex-shrink: 0;
-    }
-    .cat-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      padding-top: 0.85rem;
-      border-top: 1px solid var(--lav-100);
-    }
-    .cat-count {
+    .cat-count-badge {
       font-size: 11px; color: var(--text-soft);
+      background: var(--lav-50); border: 1px solid var(--lav-100);
+      padding: 2px 9px; border-radius: 10px; font-weight: 500;
     }
     .cat-tag {
       font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
@@ -264,6 +252,54 @@
     .tag-seeding { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
     .tag-building { background: var(--lav-50); color: var(--lav-600); border: 1px solid var(--lav-100); }
     .tag-planned  { background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+    .cat-chevron {
+      color: var(--lav-400); font-size: 12px; transition: transform 0.2s; flex-shrink: 0;
+    }
+    .archive-category.open .cat-chevron { transform: rotate(180deg); }
+
+    /* Entry list */
+    .cat-entries {
+      display: none;
+      border-top: 1px solid var(--lav-100);
+      padding: 0.5rem 0;
+    }
+    .archive-category.open .cat-entries { display: block; }
+
+    .entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid var(--lav-50);
+      transition: background 0.15s;
+    }
+    .entry:last-child { border-bottom: none; }
+    .entry:hover { background: var(--lav-50); }
+    .entry-icon {
+      font-size: 15px; flex-shrink: 0; margin-top: 2px; opacity: 0.7;
+    }
+    .entry-body { flex: 1; min-width: 0; }
+    .entry-title {
+      font-size: 13px; font-weight: 600; color: var(--lav-800);
+      text-decoration: none; line-height: 1.4; display: block;
+    }
+    .entry-title:hover { color: var(--lav-600); text-decoration: underline; }
+    .entry-meta {
+      font-size: 11px; color: var(--text-soft); margin-top: 3px;
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    }
+    .entry-source {
+      background: var(--lav-50); color: var(--lav-600);
+      border: 1px solid var(--lav-100);
+      padding: 1px 7px; border-radius: 8px; font-weight: 500;
+      font-size: 10px; letter-spacing: 0.03em; text-transform: uppercase;
+    }
+    .entry-year {
+      color: var(--text-soft);
+    }
+    .entry-access {
+      color: #166534; font-weight: 500;
+    }
 
     /* Progress note */
     .archive-note {
@@ -348,6 +384,7 @@
       .cta { padding: 2.5rem 1.25rem; }
       .archive-section { padding: 2.5rem 1rem; }
       .archive-header { flex-direction: column; }
+      .cat-meta { display: none; }
     }
   </style>
 </head>
@@ -440,114 +477,291 @@
           <div class="section-label">Archive</div>
           <h2>The collection is taking shape</h2>
         </div>
-        <div class="archive-status-badge">Structure being built</div>
+        <div class="archive-status-badge">Actively seeding</div>
       </div>
 
-      <div class="archive-grid">
+      <div class="archive-categories">
 
-        <!-- Trans Health -->
-        <div class="archive-category">
-          <div class="cat-header">
+        <!-- ── Trans Healthcare ── -->
+        <div class="archive-category open">
+          <div class="cat-header-row" onclick="toggleCategory(this)">
             <div class="cat-icon" style="background:#f5f0ff;">🏳️‍⚧️</div>
-            <div>
+            <div class="cat-header-text">
               <div class="cat-title">Transgender Healthcare</div>
-              <div class="cat-subtitle">HRT, outcomes, endocrinology</div>
+              <div class="cat-subtitle">HRT, outcomes, endocrinology, mental health</div>
             </div>
+            <div class="cat-meta">
+              <span class="cat-count-badge">5 entries</span>
+              <span class="cat-tag tag-seeding">Seeding</span>
+            </div>
+            <span class="cat-chevron">▼</span>
           </div>
-          <ul class="cat-topics">
-            <li>Hormone therapy protocols & dosing literature</li>
-            <li>Long-term transition outcomes research</li>
-            <li>Endocrinology & reproductive health studies</li>
-            <li>Mental health & gender dysphoria research</li>
-            <li>Surgical outcomes & aftercare documentation</li>
-          </ul>
-          <div class="cat-footer">
-            <span class="cat-count">Seeding sources</span>
-            <span class="cat-tag tag-seeding">Seeding</span>
+          <div class="cat-entries">
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10444622/" target="_blank" rel="noopener">
+                  Psychosocial Functioning Changes After Gender-Affirming Hormone Therapy: A Systematic Review
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">PMC / NIH</span>
+                  <span class="entry-year">2023</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://pubmed.ncbi.nlm.nih.gov/34394009/" target="_blank" rel="noopener">
+                  Short-Term Effects of Gender-Affirming Hormone Therapy on Dysphoria and Quality of Life: A Prospective Controlled Study
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">Frontiers in Endocrinology</span>
+                  <span class="entry-year">2021</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://pubmed.ncbi.nlm.nih.gov/33471729/" target="_blank" rel="noopener">
+                  Clinical Pearls of Gender-Affirming Hormone Therapy in Transgender Patients
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">Endocrine Practice</span>
+                  <span class="entry-year">2021</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://pubmed.ncbi.nlm.nih.gov/36403287/" target="_blank" rel="noopener">
+                  Feminizing Gender-Affirming Hormone Therapy: Treatment Modality, Monitoring, and Risks — A Review
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">Neurourology &amp; Urodynamics</span>
+                  <span class="entry-year">2023</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://www.jmir.org/2025/1/e64017" target="_blank" rel="noopener">
+                  Mental Health Changes in US Transgender Adults Beginning Hormone Therapy Via Telehealth: Longitudinal Cohort Study
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">JMIR</span>
+                  <span class="entry-year">2025</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- HIV/AIDS -->
+        <!-- ── HIV/AIDS ── -->
         <div class="archive-category">
-          <div class="cat-header">
+          <div class="cat-header-row" onclick="toggleCategory(this)">
             <div class="cat-icon" style="background:#fff0f5;">🩸</div>
-            <div>
+            <div class="cat-header-text">
               <div class="cat-title">HIV/AIDS Literature</div>
-              <div class="cat-subtitle">ART, PrEP, epidemiology, history</div>
+              <div class="cat-subtitle">ART, PrEP, epidemiology, surveillance history</div>
             </div>
+            <div class="cat-meta">
+              <span class="cat-count-badge">5 entries</span>
+              <span class="cat-tag tag-seeding">Seeding</span>
+            </div>
+            <span class="cat-chevron">▼</span>
           </div>
-          <ul class="cat-topics">
-            <li>Antiretroviral therapy research & protocols</li>
-            <li>PrEP & PEP efficacy studies</li>
-            <li>Epidemic history & community documentation</li>
-            <li>Epidemiology & transmission data</li>
-            <li>Long-term survivor health outcomes</li>
-          </ul>
-          <div class="cat-footer">
-            <span class="cat-count">Seeding sources</span>
-            <span class="cat-tag tag-seeding">Seeding</span>
+          <div class="cat-entries">
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10384104/" target="_blank" rel="noopener">
+                  From Innovation to Implementation: The Evolution of HIV Pre-Exposure Prophylaxis and Future Implications
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">PMC / NIH</span>
+                  <span class="entry-year">2023</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3912017/" target="_blank" rel="noopener">
+                  Pre-Exposure Prophylaxis for Preventing Acquisition of HIV in High Risk Populations: A Meta-Analysis of Randomized Controlled Trials
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">PMC / NIH</span>
+                  <span class="entry-year">2014</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2809117/" target="_blank" rel="noopener">
+                  Systemic Administration of Antiretrovirals Prior to Exposure Prevents Rectal and Intravenous HIV-1 Transmission
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">PMC / NIH</span>
+                  <span class="entry-year">2010</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📊</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8174674/" target="_blank" rel="noopener">
+                  Estimated Annual Number of HIV Infections — United States, 1981–2019
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">CDC / MMWR</span>
+                  <span class="entry-year">2021</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">🗂️</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://www.cdc.gov/hiv-data/archive/index.html" target="_blank" rel="noopener">
+                  CDC HIV Archival Data — National HIV Surveillance System Historical Releases
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">CDC</span>
+                  <span class="entry-year">1981–present</span>
+                  <span class="entry-access">✓ Public domain</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Community Health -->
+        <!-- ── LGBTQ+ Community Health ── -->
         <div class="archive-category">
-          <div class="cat-header">
+          <div class="cat-header-row" onclick="toggleCategory(this)">
             <div class="cat-icon" style="background:#f0fff4;">🫂</div>
-            <div>
+            <div class="cat-header-text">
               <div class="cat-title">LGBTQ+ Community Health</div>
-              <div class="cat-subtitle">Mental health, harm reduction, advocacy</div>
+              <div class="cat-subtitle">Mental health, disparities, access barriers</div>
             </div>
+            <div class="cat-meta">
+              <span class="cat-count-badge">3 entries</span>
+              <span class="cat-tag tag-building">In Progress</span>
+            </div>
+            <span class="cat-chevron">▼</span>
           </div>
-          <ul class="cat-topics">
-            <li>Queer mental health research</li>
-            <li>Harm reduction & substance use literature</li>
-            <li>Healthcare access barriers & policy research</li>
-            <li>Advocacy organization publications</li>
-          </ul>
-          <div class="cat-footer">
-            <span class="cat-count">Building category</span>
-            <span class="cat-tag tag-building">In Progress</span>
+          <div class="cat-entries">
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11780479/" target="_blank" rel="noopener">
+                  Mental Health Disparities by Sexual Orientation and Gender Identity in the All of Us Research Program
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">PMC / NIH</span>
+                  <span class="entry-year">2025</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7736182/" target="_blank" rel="noopener">
+                  Future Directions in Understanding and Addressing Mental Health Among LGBTQ Youth
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">PMC / NIH</span>
+                  <span class="entry-year">2020</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="entry">
+              <span class="entry-icon">📄</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10598237/" target="_blank" rel="noopener">
+                  Health Disparities Among LGBTQ+ Older Adults: A Structural Competency Approach
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">PMC / NIH</span>
+                  <span class="entry-year">2023</span>
+                  <span class="entry-access">✓ Free full text</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Historical -->
+        <!-- ── Historical Documentation ── -->
         <div class="archive-category">
-          <div class="cat-header">
+          <div class="cat-header-row" onclick="toggleCategory(this)">
             <div class="cat-icon" style="background:#fefce8;">📜</div>
-            <div>
+            <div class="cat-header-text">
               <div class="cat-title">Historical Documentation</div>
               <div class="cat-subtitle">Defunded orgs, retracted studies, archival materials</div>
             </div>
+            <div class="cat-meta">
+              <span class="cat-count-badge">1 entry</span>
+              <span class="cat-tag tag-planned">Planned</span>
+            </div>
+            <span class="cat-chevron">▼</span>
           </div>
-          <ul class="cat-topics">
-            <li>Defunded organization records & publications</li>
-            <li>Retracted-but-valid research preservation</li>
-            <li>Government health agency historical data</li>
-            <li>Activist & movement documentation</li>
-          </ul>
-          <div class="cat-footer">
-            <span class="cat-count">Planned</span>
-            <span class="cat-tag tag-planned">Planned</span>
+          <div class="cat-entries">
+
+            <div class="entry">
+              <span class="entry-icon">🗂️</span>
+              <div class="entry-body">
+                <a class="entry-title" href="https://www.ncbi.nlm.nih.gov/books/NBK216140/" target="_blank" rel="noopener">
+                  Public Health and HIV/AIDS Surveillance: History of Case Reporting and Surveillance System Development (NIH Bookshelf)
+                </a>
+                <div class="entry-meta">
+                  <span class="entry-source">NIH Bookshelf</span>
+                  <span class="entry-year">Historical</span>
+                  <span class="entry-access">✓ Public domain</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-      </div>
+      </div><!-- /archive-categories -->
 
       <!-- Informational note -->
       <div class="archive-note">
         <div class="archive-note-icon">🪻</div>
         <div class="archive-note-text">
-          <strong>The archive structure is being built.</strong> Categories and ingestion pipelines are actively in development on sovereign, ZFS-redundant hardware. Public browsing and search will come online as the collection grows.
-          Have research to contribute? <a href="mailto:contact@lavenderlifelinearchive.org" style="color:var(--lav-600); font-weight:600;">Reach out directly</a> or
+          <strong>The archive is actively seeding.</strong> Entries above link to freely accessible sources on PMC, NIH, and CDC while local hosting infrastructure comes online on sovereign, ZFS-redundant hardware. Have research to contribute?
+          <a href="mailto:contact@lavenderlifelinearchive.org" style="color:var(--lav-600); font-weight:600;">Reach out directly</a> or
           <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener" style="color:var(--lav-600); font-weight:600;">open an issue on GitHub</a>.
         </div>
-      </div>
-
-      <!-- Backend under development notice -->
-      <div style="margin-top:1rem; text-align:center; padding: 1rem 1.25rem; background:#fafafa; border: 1px dashed var(--lav-200); border-radius: 10px;">
-        <p style="font-size:12px; color:var(--text-soft); letter-spacing:0.03em;">
-          ⚙️ &nbsp;<strong style="color:var(--lav-800);">The backend is still under development</strong> — please stand by.
-        </p>
       </div>
 
     </div>
@@ -601,8 +815,7 @@
   <section class="cta">
     <h2>The lavender fields are being sown</h2>
     <p>
-      Much more work is yet to be done. Follow the project, share the mission,
-      contribute research sources, or support the infrastructure.
+      Follow the project, share the mission, contribute research sources, or support the infrastructure.
       Every share gets this in front of someone who needs it.
     </p>
     <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener" class="btn-white">Get involved on GitHub</a>
@@ -610,23 +823,6 @@
       Or reach out directly —
       <a href="mailto:contact@lavenderlifelinearchive.org" style="color:#e8d5ff; text-decoration:underline;">contact@lavenderlifelinearchive.org</a>
     </p>
-  </section>
-
-  <!-- Contact -->
-  <section class="section" style="text-align:center; padding: 2.5rem 2rem;">
-    <div class="section-label">Get in touch</div>
-    <h2 style="margin-bottom:0.75rem;">Have research to contribute?<br>Want to get involved?</h2>
-    <p style="max-width:460px; margin: 0 auto 1.25rem;">
-      Whether you have research sources to share, want to support the infrastructure,
-      or just want to follow along — reach out. Every contribution matters.
-    </p>
-    <a href="mailto:contact@lavenderlifelinearchive.org" style="
-      display: inline-block;
-      background: var(--lav-50); color: var(--lav-600);
-      border: 1.5px solid var(--lav-200);
-      padding: 10px 24px; border-radius: 8px;
-      font-size: 14px; font-weight: 600; text-decoration: none;
-    ">contact@lavenderlifelinearchive.org</a>
   </section>
 
   <!-- Footer -->
@@ -661,6 +857,13 @@
     <span style="background:var(--pride-blue)"></span>
     <span style="background:var(--pride-purple)"></span>
   </div>
+
+  <script>
+    function toggleCategory(headerRow) {
+      const category = headerRow.closest('.archive-category');
+      category.classList.toggle('open');
+    }
+  </script>
 
 </body>
 </html>
