@@ -373,6 +373,99 @@
     footer a { color: var(--lav-400); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
+    /* ── Resources section ── */
+    .resources-section {
+      padding: 3.5rem 2rem;
+      background: var(--lav-50);
+      border-bottom: 0.5px solid var(--lav-100);
+    }
+    .resources-inner { max-width: 860px; margin: 0 auto; }
+    .resources-header { margin-bottom: 2rem; }
+    .resources-header .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--lav-400); margin-bottom: 0.4rem;
+    }
+    .resources-header h2 {
+      font-size: 1.5rem; font-weight: 700; color: var(--lav-800); line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .resources-header p {
+      font-size: 0.9rem; color: var(--text-mid); max-width: 560px; line-height: 1.7;
+    }
+
+    .resources-group { margin-bottom: 2rem; }
+    .resources-group-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-soft);
+      margin-bottom: 0.85rem; padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--lav-100);
+    }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.85rem;
+    }
+    .resource-card {
+      background: #fff;
+      border: 1px solid var(--lav-100);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      position: relative;
+    }
+    .resource-card:hover {
+      border-color: var(--lav-400);
+      box-shadow: 0 2px 12px rgba(168,85,247,0.08);
+    }
+    .resource-card-top {
+      display: flex; align-items: center; gap: 9px;
+    }
+    .resource-card-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+    .resource-card-name {
+      font-size: 13px; font-weight: 700; color: var(--lav-800); line-height: 1.3;
+    }
+    .resource-card-desc {
+      font-size: 12px; color: var(--text-mid); line-height: 1.6;
+    }
+    .resource-card-tags {
+      display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px;
+    }
+    .resource-tag {
+      font-size: 10px; font-weight: 500;
+      padding: 2px 8px; border-radius: 8px;
+      background: var(--lav-50); color: var(--lav-600);
+      border: 1px solid var(--lav-100);
+    }
+    .resource-tag-crisis {
+      background: #fff1f2; color: #be123c; border-color: #fecdd3;
+    }
+    .resource-tag-local {
+      background: #f0fdf4; color: #166534; border-color: #bbf7d0;
+    }
+    .resource-card-arrow {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 11px; color: var(--lav-200);
+      transition: color 0.15s;
+    }
+    .resource-card:hover .resource-card-arrow { color: var(--lav-400); }
+
+    .resources-disclaimer {
+      margin-top: 1rem;
+      font-size: 12px; color: var(--text-soft); line-height: 1.7;
+      padding: 0.85rem 1rem;
+      background: #fff;
+      border: 1px solid var(--lav-100);
+      border-radius: 8px;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 600px) {
       nav { padding: 0.75rem 1rem; }
@@ -416,6 +509,7 @@
     <ul class="nav-links">
       <li><a href="#mission">Mission</a></li>
       <li><a href="#archive">Archive</a></li>
+      <li><a href="#resources">Resources</a></li>
       <li><a href="#story">About</a></li>
       <li><a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">GitHub</a></li>
     </ul>
@@ -762,6 +856,162 @@
           <a href="mailto:contact@lavenderlifelinearchive.org" style="color:var(--lav-600); font-weight:600;">Reach out directly</a> or
           <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener" style="color:var(--lav-600); font-weight:600;">open an issue on GitHub</a>.
         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ RESOURCES SECTION ══ -->
+  <section class="resources-section" id="resources">
+    <div class="resources-inner">
+
+      <div class="resources-header">
+        <div class="section-label">Find Care</div>
+        <h2>Resources for the community</h2>
+        <p>Providers, hotlines, and directories for trans and LGBTQ+ people seeking affirming healthcare. Links are verified active — if something is down, <a href="mailto:contact@lavenderlifelinearchive.org" style="color:var(--lav-600);">let us know</a>.</p>
+      </div>
+
+      <!-- Telehealth -->
+      <div class="resources-group">
+        <div class="resources-group-label">Telehealth Providers — National</div>
+        <div class="resources-grid">
+
+          <a class="resource-card" href="https://getplume.co" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#f5f0ff;">🪷</div>
+              <div class="resource-card-name">Plume</div>
+            </div>
+            <div class="resource-card-desc">Trans-led telehealth for gender-affirming hormone therapy. Informed consent model — no therapist letter required. Available in 47 states.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag">HRT</span>
+              <span class="resource-tag">Telehealth</span>
+              <span class="resource-tag">Trans-led</span>
+            </div>
+          </a>
+
+          <a class="resource-card" href="https://www.folxhealth.com" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#fff0f5;">🏳️‍🌈</div>
+              <div class="resource-card-name">FOLX Health</div>
+            </div>
+            <div class="resource-card-desc">LGBTQ+-by-LGBTQ+ clinicians. HRT, PrEP, primary care, mental health, and sexual health — all via telehealth. Over 1 in 3 clinicians identify as trans or nonbinary.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag">HRT</span>
+              <span class="resource-tag">PrEP</span>
+              <span class="resource-tag">Primary Care</span>
+              <span class="resource-tag">Telehealth</span>
+            </div>
+          </a>
+
+          <a class="resource-card" href="https://www.plannedparenthood.org/get-care/our-services/gender-affirming-care" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#fff0f5;">🩺</div>
+              <div class="resource-card-name">Planned Parenthood</div>
+            </div>
+            <div class="resource-card-desc">Gender-affirming hormone therapy at most health centers nationwide, many offering telehealth. Informed consent, sliding scale fees, most insurance accepted.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag">HRT</span>
+              <span class="resource-tag">In-person + Telehealth</span>
+              <span class="resource-tag">Sliding Scale</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- In-person / Regional -->
+      <div class="resources-group">
+        <div class="resources-group-label">In-Person &amp; Regional Providers</div>
+        <div class="resources-grid">
+
+          <a class="resource-card" href="https://www.centraloutreach.com" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#f0fff4;">🏥</div>
+              <div class="resource-card-name">Central Outreach Wellness Center</div>
+            </div>
+            <div class="resource-card-desc">Western PA & Ohio. Gender-affirming care, HIV/Hep C treatment, PrEP, mental health — no insurance required. 9 locations including Pittsburgh North Shore.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag resource-tag-local">Pittsburgh + OH</span>
+              <span class="resource-tag">HRT</span>
+              <span class="resource-tag">HIV Care</span>
+              <span class="resource-tag">No Insurance OK</span>
+            </div>
+          </a>
+
+          <a class="resource-card" href="https://howardbrown.org/service/tgd-health/" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#f0f9ff;">🏳️‍⚧️</div>
+              <div class="resource-card-name">Howard Brown Health</div>
+            </div>
+            <div class="resource-card-desc">Chicago-based. Comprehensive trans & gender diverse health including hormone therapy, surgery navigation, mental health, and HIV services.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag resource-tag-local">Chicago, IL</span>
+              <span class="resource-tag">HRT</span>
+              <span class="resource-tag">Surgery Nav</span>
+              <span class="resource-tag">HIV Care</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Directories & Crisis -->
+      <div class="resources-group">
+        <div class="resources-group-label">Directories, Databases &amp; Crisis Support</div>
+        <div class="resources-grid">
+
+          <a class="resource-card" href="https://www.outcarehealth.org/outlist/" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#f5f0ff;">🔍</div>
+              <div class="resource-card-name">OutCare OutList</div>
+            </div>
+            <div class="resource-card-desc">National directory of LGBTQ+-affirming healthcare providers. Search by location, specialty, and identity. Run by OutCare Health, a nonprofit focused on LGBTQ+ health equity.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag">Provider Directory</span>
+              <span class="resource-tag">National</span>
+            </div>
+          </a>
+
+
+          <a class="resource-card" href="https://translifeline.org/hotline/" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#fff1f2;">📞</div>
+              <div class="resource-card-name">Trans Lifeline</div>
+            </div>
+            <div class="resource-card-desc">Peer support hotline run by trans people, for trans people. US: 877-565-8860 &nbsp;|&nbsp; Canada: 877-330-6366. Not just for crises — call if you need someone trans to talk to.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag resource-tag-crisis">Crisis Support</span>
+              <span class="resource-tag">Peer-run</span>
+              <span class="resource-tag">Trans-only Operators</span>
+            </div>
+          </a>
+
+          <a class="resource-card" href="https://www.thetrevorproject.org" target="_blank" rel="noopener">
+            <span class="resource-card-arrow">↗</span>
+            <div class="resource-card-top">
+              <div class="resource-card-icon" style="background:#fff1f2;">🤝</div>
+              <div class="resource-card-name">The Trevor Project</div>
+            </div>
+            <div class="resource-card-desc">Crisis intervention and suicide prevention for LGBTQ+ youth under 25. TrevorLifeline: 1-866-488-7386. TrevorText: text START to 678-678. 24/7.</div>
+            <div class="resource-card-tags">
+              <span class="resource-tag resource-tag-crisis">Crisis Support</span>
+              <span class="resource-tag">Youth (under 25)</span>
+              <span class="resource-tag">24/7</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="resources-disclaimer">
+        🪻 &nbsp;This list is maintained by the Lavender Lifeline Archive and updated as providers change. Links reflect current status as of May 2025. If a resource has gone offline or you know of one we should add, <a href="mailto:contact@lavenderlifelinearchive.org" style="color:var(--lav-600); font-weight:600;">reach out</a> or <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" style="color:var(--lav-600); font-weight:600;" target="_blank" rel="noopener">open an issue on GitHub</a>.
       </div>
 
     </div>
