@@ -874,5 +874,10 @@
   <div class="trans-bar" aria-hidden="true"><span style="background:var(--trans-blue)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-white)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-blue)"></span></div>
   <div class="pride-bar" aria-hidden="true"><span style="background:var(--pride-red)"></span><span style="background:var(--pride-orange)"></span><span style="background:var(--pride-yellow)"></span><span style="background:var(--pride-green)"></span><span style="background:var(--pride-blue)"></span><span style="background:var(--pride-purple)"></span></div>
   <script src="nav.js"></script>
+  <script>
+    function toggleCategory(row) {
+      row.closest('.archive-category').classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
