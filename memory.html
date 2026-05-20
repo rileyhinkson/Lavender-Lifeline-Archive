@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>In Memoriam — Lavender Lifeline Archive</title>
+  <meta name="description" content="A memorial to LGBTQ+ and transgender people lost to hatred, violence, persecution, and systemic harm. Their names endure."/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --lav-50:  #f5f0ff;
+      --lav-100: #e8d5ff;
+      --lav-200: #d4b0ff;
+      --lav-400: #a855f7;
+      --lav-600: #7c3aed;
+      --lav-800: #4c1d95;
+      --trans-blue:  #55cdfc;
+      --trans-pink:  #f7a8b8;
+      --trans-white: #ffffff;
+      --pride-red:    #e40303;
+      --pride-orange: #ff8c00;
+      --pride-yellow: #ffed00;
+      --pride-green:  #008026;
+      --pride-blue:   #004dff;
+      --pride-purple: #750787;
+      --text:      #1a1a2e;
+      --text-mid:  #555;
+      --text-soft: #777;
+      --mem-bg:    #0f0a1a;
+      --mem-mid:   #1a1030;
+      --mem-border:#2d1f4e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; color: var(--text); background: #fff;
+    }
+
+    /* ── Pride & Trans bars ── */
+    .pride-bar { height: 6px; display: flex; }
+    .pride-bar span, .trans-bar span { flex: 1; }
+    .trans-bar { height: 4px; display: flex; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.875rem 2rem;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--lav-100);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600; color: var(--lav-800); text-decoration: none;
+    }
+    .nav-logo .flower {
+      width: 30px; height: 30px; background: var(--lav-100); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 17px;
+    }
+    .nav-links-desktop { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links-desktop a {
+      font-size: 13px; color: var(--lav-600); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links-desktop a:hover, .nav-links-desktop a.nav-active { color: var(--lav-800); font-weight: 700; }
+    .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:6px;background:none;border:none;cursor:pointer;border-radius:8px;transition:background 0.15s;z-index:300;}
+    .nav-toggle:hover{background:var(--lav-50);}
+    .nav-toggle span{display:block;height:2px;border-radius:2px;background:var(--lav-800);transition:transform 0.25s,opacity 0.25s;}
+    .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+    .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:150;opacity:0;transition:opacity 0.25s;}
+    .nav-overlay.open{opacity:1;}
+    .nav-drawer{position:fixed;top:0;right:0;bottom:0;width:min(280px,80vw);background:#fff;z-index:200;transform:translateX(100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-left:1px solid var(--lav-100);padding:5rem 0 2rem;overflow-y:auto;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer a{display:block;padding:0.85rem 2rem;font-size:15px;font-weight:500;color:var(--lav-600);text-decoration:none;border-bottom:0.5px solid var(--lav-50);transition:background 0.15s,color 0.15s;}
+    .nav-drawer a:hover{background:var(--lav-50);color:var(--lav-800);}
+    .nav-drawer a.nav-active{color:var(--lav-800);font-weight:700;background:var(--lav-50);border-left:3px solid var(--lav-400);}
+    .nav-drawer-footer{margin-top:auto;padding:1.5rem 2rem;font-size:11px;color:var(--text-soft);line-height:1.7;}
+
+    /* ── Memorial Hero ── */
+    .mem-hero {
+      background: var(--mem-bg);
+      padding: 5rem 2rem 4rem; text-align: center;
+      border-bottom: 1px solid var(--mem-border);
+    }
+    .mem-flame { font-size: 3rem; margin-bottom: 1.25rem; display: block; }
+    .mem-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.5rem); font-weight: 700;
+      color: #fff; letter-spacing: -0.01em; margin-bottom: 1rem; line-height: 1.1;
+    }
+    .mem-hero h1 span { color: var(--lav-400); }
+    .mem-hero-sub {
+      font-size: 1rem; color: #a89cc8; max-width: 580px; margin: 0 auto 1.5rem; line-height: 1.9;
+    }
+    .mem-count {
+      display: inline-block; background: rgba(168,85,247,0.15);
+      border: 1px solid rgba(168,85,247,0.3); border-radius: 20px;
+      padding: 6px 18px; font-size: 12px; color: var(--lav-400); font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Source note ── */
+    .source-note {
+      background: #1a1030; border-bottom: 1px solid var(--mem-border);
+      padding: 0.85rem 2rem; font-size: 12px; color: #7a6d8f;
+      text-align: center; line-height: 1.7;
+    }
+    .source-note a { color: var(--lav-400); text-decoration: none; }
+    .source-note a:hover { text-decoration: underline; }
+
+    /* ── Memorial sections ── */
+    .mem-section {
+      padding: 3rem 2rem; border-bottom: 1px solid #eee;
+    }
+    .mem-section.dark {
+      background: var(--mem-bg); border-bottom: 1px solid var(--mem-border);
+    }
+    .mem-inner { max-width: 940px; margin: 0 auto; }
+    .mem-section-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .dark .mem-section-label { color: var(--lav-400); }
+    .light .mem-section-label { color: var(--lav-600); }
+    .mem-section h2 {
+      font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3;
+    }
+    .dark .mem-section h2 { color: #fff; }
+    .light .mem-section h2 { color: var(--lav-800); }
+    .mem-section-desc {
+      font-size: 0.9rem; line-height: 1.8; margin-bottom: 2rem; max-width: 660px;
+    }
+    .dark .mem-section-desc { color: #a89cc8; }
+    .light .mem-section-desc { color: var(--text-mid); }
+
+    /* ── Memorial entry cards ── */
+    .mem-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px;
+      background: var(--mem-border); border: 1px solid var(--mem-border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 1rem;
+    }
+    .light .mem-grid { background: #e5e7eb; border-color: #e5e7eb; }
+    .mem-entry {
+      padding: 1.1rem 1.25rem;
+      background: var(--mem-mid);
+    }
+    .light .mem-entry { background: #fff; }
+    .mem-entry-name {
+      font-size: 14px; font-weight: 700; margin-bottom: 3px; line-height: 1.3;
+    }
+    .dark .mem-entry-name { color: #e2d9f3; }
+    .light .mem-entry-name { color: var(--lav-800); }
+    .mem-entry-years {
+      font-size: 12px; font-weight: 500; margin-bottom: 5px;
+    }
+    .dark .mem-entry-years { color: var(--lav-400); }
+    .light .mem-entry-years { color: var(--lav-600); }
+    .mem-entry-desc {
+      font-size: 11.5px; line-height: 1.65;
+    }
+    .dark .mem-entry-desc { color: #8a7aa0; }
+    .light .mem-entry-desc { color: var(--text-soft); }
+
+    /* ── Wall of names ── */
+    .wall-section {
+      background: var(--mem-bg); padding: 3.5rem 2rem;
+      border-top: 1px solid var(--mem-border);
+    }
+    .wall-inner { max-width: 1100px; margin: 0 auto; }
+    .wall-header { text-align: center; margin-bottom: 2.5rem; }
+    .wall-header h2 { font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .wall-header p { font-size: 0.9rem; color: #8a7aa0; line-height: 1.7; }
+    .names-wall {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    }
+    .name-chip {
+      padding: 5px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 500; color: #c4b5d9;
+      background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.2);
+      transition: background 0.15s, color 0.15s;
+    }
+    .name-chip:hover { background: rgba(168,85,247,0.2); color: #e2d9f3; }
+
+    /* ── Database links ── */
+    .db-section {
+      padding: 3rem 2rem; background: var(--lav-50); border-top: 1px solid var(--lav-100);
+    }
+    .db-inner { max-width: 860px; margin: 0 auto; }
+    .db-section h2 { font-size: 1.3rem; font-weight: 700; color: var(--lav-800); margin-bottom: 0.5rem; }
+    .db-section p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 1.5rem; }
+    .db-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.85rem; }
+    .db-card {
+      background: #fff; border: 1px solid var(--lav-100); border-radius: 12px;
+      padding: 1.1rem 1.25rem; text-decoration: none; display: flex; flex-direction: column;
+      gap: 0.4rem; transition: border-color 0.15s, box-shadow 0.15s; position: relative;
+    }
+    .db-card:hover { border-color: var(--lav-400); box-shadow: 0 2px 12px rgba(168,85,247,0.08); }
+    .db-card-name { font-size: 13px; font-weight: 700; color: var(--lav-800); }
+    .db-card-desc { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+    .db-card-arrow { position: absolute; top: 1rem; right: 1rem; font-size: 11px; color: var(--lav-200); }
+    .db-card:hover .db-card-arrow { color: var(--lav-400); }
+
+    /* ── Crisis ── */
+    .crisis-strip {
+      background: #fff; border-top: 1px solid var(--lav-100);
+      padding: 1.25rem 2rem; text-align: center;
+      font-size: 13px; color: var(--text-mid); line-height: 1.8;
+    }
+    .crisis-strip strong { color: var(--lav-800); }
+    .crisis-strip a { color: var(--lav-600); font-weight: 600; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 1.75rem 2rem; text-align: center;
+      font-size: 12px; color: #999;
+      border-top: 0.5px solid var(--lav-100); line-height: 2;
+    }
+    footer a { color: var(--lav-400); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-links-desktop { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-overlay { display: block; pointer-events: none; }
+      .nav-overlay.open { pointer-events: all; }
+      .mem-hero { padding: 3.5rem 1.25rem 3rem; }
+      .mem-section { padding: 2.5rem 1rem; }
+      .wall-section { padding: 2.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pride-bar" aria-hidden="true"><span style="background:var(--pride-red)"></span><span style="background:var(--pride-orange)"></span><span style="background:var(--pride-yellow)"></span><span style="background:var(--pride-green)"></span><span style="background:var(--pride-blue)"></span><span style="background:var(--pride-purple)"></span></div>
+  <div class="trans-bar" aria-hidden="true"><span style="background:var(--trans-blue)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-white)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-blue)"></span></div>
+  <div class="nav-overlay" id="nav-overlay"></div>
+  <nav>
+    <a href="index.html" class="nav-logo"><div class="flower">🪻</div>Lavender Lifeline Archive</a>
+    <ul class="nav-links-desktop">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="archive.html">Archive</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="memory.html">Memory</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="index.html">🏠&nbsp; Home</a>
+    <a href="archive.html">🗂️&nbsp; Archive</a>
+    <a href="resources.html">🫂&nbsp; Find Care</a>
+    <a href="safety.html">🛡️&nbsp; Travel Safety</a>
+    <a href="memory.html">🕯️&nbsp; Memory</a>
+    <a href="about.html">🪻&nbsp; About</a>
+    <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">⌥&nbsp; GitHub</a>
+    <div class="nav-drawer-footer">Lavender Lifeline Archive<br>The lavender fields are being sown.</div>
+  </div>
+
+  <!-- Hero -->
+  <section class="mem-hero">
+    <span class="mem-flame">🕯️</span>
+    <h1>In <span>Memoriam</span></h1>
+    <p class="mem-hero-sub">We remember those lost to hatred, violence, legal persecution, and systemic harm — because of who they were, who they loved, and how they lived. Their names endure.</p>
+    <span class="mem-count">This page is a living memorial. It will never be finished.</span>
+  </section>
+
+  <div class="source-note">
+    Names and details sourced from public records, the <a href="https://tdor.info" target="_blank" rel="noopener">Transgender Day of Remembrance database</a>, the <a href="https://www.hrc.org/resources/fatal-violence-against-the-transgender-and-gender-non-conforming-community-in-2023" target="_blank" rel="noopener">Human Rights Campaign</a>, and historical documentation. If someone is missing, <a href="mailto:contact@lavenderlifelinearchive.org">reach out</a> or <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">open an issue on GitHub</a>.
+  </div>
+
+  <!-- ══ HISTORICAL PERSECUTION ══ -->
+  <section class="mem-section dark">
+    <div class="mem-inner">
+      <div class="mem-section-label">Historical Persecution &amp; Legal Violence</div>
+      <h2>Lost to the Law</h2>
+      <p class="mem-section-desc">People whose lives were destroyed or ended by governments and legal systems that criminalized who they were. Many were brilliant, defiant, and irreplaceable.</p>
+      <div class="mem-grid">
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Alan Turing</div>
+          <div class="mem-entry-years">1912 – 1954 &nbsp;·&nbsp; Age 41</div>
+          <div class="mem-entry-desc">British mathematician and WWII codebreaker. Convicted of "gross indecency" for homosexuality in 1952. Subjected to chemical castration by court order. Died of cyanide poisoning in 1954. Widely regarded as a persecution-related death. Posthumously pardoned in 2013.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Oscar Wilde</div>
+          <div class="mem-entry-years">1854 – 1900 &nbsp;·&nbsp; Age 46</div>
+          <div class="mem-entry-desc">Irish playwright and poet. Imprisoned 1895–1897 for "gross indecency" for homosexuality. Subjected to hard labor which destroyed his health. Released destitute and in failing health. Died in Paris in 1900. "To deny one's own experiences is to put a lie into the lips of one's own life."</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Harvey Milk</div>
+          <div class="mem-entry-years">1930 – 1978 &nbsp;·&nbsp; Age 48</div>
+          <div class="mem-entry-desc">First openly gay person elected to public office in California. San Francisco City Supervisor. Assassinated on November 27, 1978, by former supervisor Dan White. His death sparked the White Night riots when White received a manslaughter sentence.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Federico García Lorca</div>
+          <div class="mem-entry-years">1898 – 1936 &nbsp;·&nbsp; Age 38</div>
+          <div class="mem-entry-desc">Spanish poet and playwright. Executed by Nationalist forces at the start of the Spanish Civil War in August 1936. His homosexuality was among the reasons used to justify his murder. His body was never recovered.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Marsha P. Johnson</div>
+          <div class="mem-entry-years">1945 – 1992 &nbsp;·&nbsp; Age 46</div>
+          <div class="mem-entry-desc">Black trans woman, LGBTQ+ activist, and prominent figure in the 1969 Stonewall uprising. Co-founder of STAR (Street Transvestite Action Revolutionaries). Found drowned in the Hudson River on July 6, 1992. Death initially ruled suicide; later changed to undetermined. Many in the community believe she was murdered.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Roger Casement</div>
+          <div class="mem-entry-years">1864 – 1916 &nbsp;·&nbsp; Age 51</div>
+          <div class="mem-entry-desc">Irish human rights activist and diplomat who documented atrocities in the Congo and Peru. Executed for treason in 1916. His private diaries documenting his homosexuality were leaked by the British government to discredit his cause and prevent clemency appeals.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ AIDS EPIDEMIC ══ -->
+  <section class="mem-section light">
+    <div class="mem-inner">
+      <div class="mem-section-label">The AIDS Epidemic</div>
+      <h2>Lost to a Crisis Met with Silence</h2>
+      <p class="mem-section-desc">The AIDS epidemic killed hundreds of thousands of gay and queer people in the United States alone — many abandoned by their government, their families, and their institutions. These are some of the artists, activists, and individuals whose names we carry. The <a href="https://www.aidsquilt.org" target="_blank" rel="noopener">NAMES Project AIDS Memorial Quilt</a> holds over 110,000 names.</p>
+      <div class="mem-grid">
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Freddie Mercury</div>
+          <div class="mem-entry-years">1946 – 1991 &nbsp;·&nbsp; Age 45</div>
+          <div class="mem-entry-desc">Musician and lead vocalist of Queen. Died of bronchopneumonia as a complication of AIDS on November 24, 1991 — one day after publicly announcing his diagnosis.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Rock Hudson</div>
+          <div class="mem-entry-years">1925 – 1985 &nbsp;·&nbsp; Age 59</div>
+          <div class="mem-entry-desc">Hollywood actor. The first major celebrity to publicly announce he was dying of AIDS, in July 1985. His death helped push Congress toward increased AIDS research funding.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Keith Haring</div>
+          <div class="mem-entry-years">1958 – 1990 &nbsp;·&nbsp; Age 31</div>
+          <div class="mem-entry-desc">Artist and LGBTQ+ activist. Founded the Keith Haring Foundation in 1989 to support AIDS organizations and children's programs. Died of AIDS-related complications on February 16, 1990.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Robert Mapplethorpe</div>
+          <div class="mem-entry-years">1946 – 1989 &nbsp;·&nbsp; Age 42</div>
+          <div class="mem-entry-desc">Photographer known for his intimate and controversial work. Died of AIDS-related complications on March 9, 1989. His work continued to be censored and fought over long after his death.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Sylvester James</div>
+          <div class="mem-entry-years">1947 – 1988 &nbsp;·&nbsp; Age 41</div>
+          <div class="mem-entry-desc">Openly gay Black disco and R&amp;B singer known as "The Queen of Disco." His falsetto voice and fearless presence made him an icon. Died of AIDS-related heart failure on December 16, 1988. He left his royalties to AIDS charities.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Halston (Roy Frowick)</div>
+          <div class="mem-entry-years">1932 – 1990 &nbsp;·&nbsp; Age 57</div>
+          <div class="mem-entry-desc">American fashion designer who defined 1970s American style. Died of AIDS-related Kaposi's sarcoma on March 26, 1990, in San Francisco.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Perry Ellis</div>
+          <div class="mem-entry-years">1940 – 1986 &nbsp;·&nbsp; Age 46</div>
+          <div class="mem-entry-desc">American fashion designer. Died on May 30, 1986. His cause of death was listed as viral encephalitis; AIDS was not publicly disclosed at the time but is widely acknowledged.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Arthur Russell</div>
+          <div class="mem-entry-years">1951 – 1992 &nbsp;·&nbsp; Age 40</div>
+          <div class="mem-entry-desc">Musician and composer whose work spanned disco, avant-garde, and folk. Died of AIDS-related complications on April 4, 1992. His music was largely rediscovered and celebrated after his death.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">David Wojnarowicz</div>
+          <div class="mem-entry-years">1954 – 1992 &nbsp;·&nbsp; Age 37</div>
+          <div class="mem-entry-desc">Artist, writer, and AIDS activist. A fierce voice against government inaction during the epidemic. Died of AIDS-related complications on July 22, 1992. His words: "If I die of AIDS, forget burial — just drop my body on the steps of the FDA."</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Essex Hemphill</div>
+          <div class="mem-entry-years">1957 – 1995 &nbsp;·&nbsp; Age 38</div>
+          <div class="mem-entry-desc">Black gay poet and activist. Editor of "Brother to Brother: New Writings by Black Gay Men." Died of AIDS-related complications on November 4, 1995.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Paul Monette</div>
+          <div class="mem-entry-years">1945 – 1995 &nbsp;·&nbsp; Age 49</div>
+          <div class="mem-entry-desc">Poet and memoirist. Author of "Borrowed Time: An AIDS Memoir" and "Becoming a Man," which won the National Book Award. Died of AIDS-related complications on February 10, 1995.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Cookie Mueller</div>
+          <div class="mem-entry-years">1949 – 1989 &nbsp;·&nbsp; Age 40</div>
+          <div class="mem-entry-desc">Writer, actress, and downtown New York fixture who appeared in many of John Waters' films. Died of AIDS-related complications on November 10, 1989.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HATE CRIMES ══ -->
+  <section class="mem-section dark">
+    <div class="mem-inner">
+      <div class="mem-section-label">Hate Crimes &amp; Violence</div>
+      <h2>Murdered for Who They Were</h2>
+      <p class="mem-section-desc">People killed because of their sexual orientation or gender identity. These are documented hate crimes and targeted killings. They represent thousands more tracked by the <a href="https://tdor.info" target="_blank" rel="noopener" style="color:var(--lav-400);">Transgender Day of Remembrance</a> and the <a href="https://www.hrc.org" target="_blank" rel="noopener" style="color:var(--lav-400);">Human Rights Campaign</a>.</p>
+      <div class="mem-grid">
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Matthew Shepard</div>
+          <div class="mem-entry-years">1976 – 1998 &nbsp;·&nbsp; Age 21</div>
+          <div class="mem-entry-desc">Gay student at the University of Wyoming. Tied to a fence post and beaten by two men in Laramie, Wyoming, on October 7, 1998. Died on October 12, 1998. His death led to the federal Matthew Shepard and James Byrd Jr. Hate Crimes Prevention Act, signed in 2009.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Brandon Teena</div>
+          <div class="mem-entry-years">1972 – 1993 &nbsp;·&nbsp; Age 21</div>
+          <div class="mem-entry-desc">Trans man. Raped and then murdered in Falls City, Nebraska on December 31, 1993 by two men after his trans identity was revealed. His story is told in the film "Boys Don't Cry" (1999).</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Gwen Araujo</div>
+          <div class="mem-entry-years">1985 – 2002 &nbsp;·&nbsp; Age 17</div>
+          <div class="mem-entry-desc">Trans Latina woman. Murdered by four men in Newark, California on October 3, 2002 after they discovered she was trans. Her murder prompted California to pass legislation limiting the use of the trans panic defense.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Sakia Gunn</div>
+          <div class="mem-entry-years">1987 – 2003 &nbsp;·&nbsp; Age 15</div>
+          <div class="mem-entry-desc">Black lesbian teenager. Stabbed while waiting for a bus with friends in Newark, New Jersey on May 11, 2003, after identifying herself as gay when two men made advances. One of the youngest known victims of an anti-LGBTQ+ hate crime.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Lawrence "Larry" King</div>
+          <div class="mem-entry-years">1993 – 2008 &nbsp;·&nbsp; Age 15</div>
+          <div class="mem-entry-desc">Gay and gender nonconforming student at E.O. Green Junior High School in Oxnard, California. Shot twice in the back of the head by a 14-year-old classmate on February 12, 2008. He died two days later.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Angie Zapata</div>
+          <div class="mem-entry-years">1989 – 2008 &nbsp;·&nbsp; Age 18</div>
+          <div class="mem-entry-desc">Trans woman. Murdered in Greeley, Colorado in July 2008. Her killer became the first person in the United States convicted under a hate crime law for killing a transgender person.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Duanna Johnson</div>
+          <div class="mem-entry-years">1965 – 2008 &nbsp;·&nbsp; Age 43</div>
+          <div class="mem-entry-desc">Black trans woman. Beaten by Memphis police officers in a booking room in February 2008 — a beating caught on video. Shot and killed in November 2008. Her case illustrated the compounding vulnerability of trans women of color to both police violence and street violence.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Jorge Steven Lopez Mercado</div>
+          <div class="mem-entry-years">1992 – 2009 &nbsp;·&nbsp; Age 17</div>
+          <div class="mem-entry-desc">Gay Puerto Rican youth. Murdered near Cayey, Puerto Rico in November 2009. His body was dismembered and partially burned. His death prompted widespread protests demanding justice for LGBTQ+ Puerto Ricans.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Mark Carson</div>
+          <div class="mem-entry-years">1981 – 2013 &nbsp;·&nbsp; Age 32</div>
+          <div class="mem-entry-desc">Black gay man. Shot point-blank in Greenwich Village, New York City on May 18, 2013 by a man who had been following and taunting him and his partner with anti-gay slurs. His murder galvanized the New York LGBTQ+ community.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Islan Nettles</div>
+          <div class="mem-entry-years">1993 – 2013 &nbsp;·&nbsp; Age 21</div>
+          <div class="mem-entry-desc">Black trans woman. Beaten to death in Harlem, New York in August 2013. Her killer discovered she was trans and beat her while bystanders watched. Her case became a rallying point for justice for trans women of color.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Brianna Ghey</div>
+          <div class="mem-entry-years">2006 – 2023 &nbsp;·&nbsp; Age 16</div>
+          <div class="mem-entry-desc">Trans girl from Birchwood, Warrington, England. Murdered on February 11, 2023, in a planned attack by two teenagers. Her mother, Esther Ghey, became a prominent advocate for online safety and anti-knife legislation.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Nex Benedict</div>
+          <div class="mem-entry-years">2007 – 2024 &nbsp;·&nbsp; Age 16</div>
+          <div class="mem-entry-desc">Nonbinary (they/he) student in Owasso, Oklahoma. Beaten in a school bathroom by multiple students on February 7, 2024. Died the following day. Their death drew national attention to anti-LGBTQ+ legislation targeting youth in Oklahoma and across the country.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TDOR — TRANS WOMEN OF COLOR ══ -->
+  <section class="mem-section light">
+    <div class="mem-inner">
+      <div class="mem-section-label">Transgender Day of Remembrance — Selected Names</div>
+      <h2>Trans Lives Lost to Violence</h2>
+      <p class="mem-section-desc">The Transgender Day of Remembrance (TDOR), founded in 1999 by Gwendolyn Ann Smith, memorializes trans people killed due to anti-transgender violence. Trans women of color are disproportionately represented among victims. The names below are drawn from HRC's annual fatal violence tracking. The <a href="https://tdor.info" target="_blank" rel="noopener">full TDOR list</a> documents hundreds per year — thousands since 1999.</p>
+      <div class="mem-grid">
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Lamia Beard</div>
+          <div class="mem-entry-years">~1984 – 2015 &nbsp;·&nbsp; Age ~30</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Portsmouth, Virginia, January 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Ty Underwood</div>
+          <div class="mem-entry-years">~1991 – 2015 &nbsp;·&nbsp; Age ~24</div>
+          <div class="mem-entry-desc">Black trans woman. Shot and killed in Tyler, Texas, January 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Taja DeJesus</div>
+          <div class="mem-entry-years">~1979 – 2015 &nbsp;·&nbsp; Age ~36</div>
+          <div class="mem-entry-desc">Trans Latina woman. Stabbed to death in San Francisco, California, February 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Penny Proud</div>
+          <div class="mem-entry-years">– 2015</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in New Orleans, Louisiana, February 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Bri Golec</div>
+          <div class="mem-entry-years">~1993 – 2015 &nbsp;·&nbsp; Age ~22</div>
+          <div class="mem-entry-desc">Trans person. Murdered in Akron, Ohio, February 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">London Chanel</div>
+          <div class="mem-entry-years">~1994 – 2015 &nbsp;·&nbsp; Age ~21</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Philadelphia, Pennsylvania, May 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">India Clarke</div>
+          <div class="mem-entry-years">~1990 – 2015 &nbsp;·&nbsp; Age ~25</div>
+          <div class="mem-entry-desc">Black trans woman. Found beaten to death in Tampa, Florida, July 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Shade Schuler</div>
+          <div class="mem-entry-years">– 2015</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Dallas, Texas, June 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Ashton O'Hara</div>
+          <div class="mem-entry-years">~1990 – 2015 &nbsp;·&nbsp; Age ~25</div>
+          <div class="mem-entry-desc">Black trans man. Murdered in Detroit, Michigan, July 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Amber Monroe</div>
+          <div class="mem-entry-years">~1995 – 2015 &nbsp;·&nbsp; Age ~20</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Detroit, Michigan, August 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Kandis Capri</div>
+          <div class="mem-entry-years">– 2015</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Phoenix, Arizona, August 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">K.C. Haggard</div>
+          <div class="mem-entry-years">– 2015</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Fresno, California, August 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Tamara Dominguez</div>
+          <div class="mem-entry-years">– 2015</div>
+          <div class="mem-entry-desc">Trans Latina woman. Murdered in Kansas City, Missouri, August 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Elisha Walker</div>
+          <div class="mem-entry-years">~1995 – 2015 &nbsp;·&nbsp; Age ~20</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Smithfield, North Carolina, September 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Keisha Jenkins</div>
+          <div class="mem-entry-years">~1993 – 2015 &nbsp;·&nbsp; Age ~22</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Philadelphia, Pennsylvania, October 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Zella Ziona</div>
+          <div class="mem-entry-years">~1994 – 2015 &nbsp;·&nbsp; Age ~21</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Germantown, Maryland, October 2015.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Jaquarrius Holland</div>
+          <div class="mem-entry-years">– 2017</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Monroe, Louisiana, February 2017.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Mesha Caldwell</div>
+          <div class="mem-entry-years">– 2017</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Canton, Mississippi, January 2017.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Chyna Gibson</div>
+          <div class="mem-entry-years">– 2017</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in New Orleans, Louisiana, February 2017.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Ciara McElveen</div>
+          <div class="mem-entry-years">– 2017</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in New Orleans, Louisiana, February 2017.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Muhlaysia Booker</div>
+          <div class="mem-entry-years">– 2019</div>
+          <div class="mem-entry-desc">Black trans woman. Survived a brutal mob attack in Dallas in April 2019, only to be murdered weeks later in May 2019. Her case drew widespread attention.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Dana Martin</div>
+          <div class="mem-entry-years">– 2019</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Montgomery, Alabama, January 2019.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Monika Diamond</div>
+          <div class="mem-entry-years">– 2020</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Charlotte, North Carolina, March 2020.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Dominique "Rem'mie" Fells</div>
+          <div class="mem-entry-years">– 2020</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Philadelphia, Pennsylvania, June 2020. Her death occurred days after the killing of Riah Milton and during the height of Black Lives Matter protests.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Riah Milton</div>
+          <div class="mem-entry-years">– 2020</div>
+          <div class="mem-entry-desc">Black trans woman. Murdered in Liberty Township, Ohio, June 2020.</div>
+        </div>
+
+        <div class="mem-entry">
+          <div class="mem-entry-name">Neulisa Luciano Ruiz (Alexa)</div>
+          <div class="mem-entry-years">– 2020</div>
+          <div class="mem-entry-desc">Trans Latina woman. Murdered in Toa Baja, Puerto Rico, February 2020. Video of her murder circulated on social media.</div>
+        </div>
+
+      </div>
+      <p style="font-size:12px;color:var(--text-soft);margin-top:1rem;line-height:1.7;">This represents a small portion of documented cases. The <a href="https://tdor.info" target="_blank" rel="noopener" style="color:var(--lav-600);">Transgender Day of Remembrance database</a> and <a href="https://www.hrc.org" target="_blank" rel="noopener" style="color:var(--lav-600);">HRC's annual tracking</a> document hundreds of additional names each year. Source: Human Rights Campaign Fatal Violence Reports, 2015–2024.</p>
+    </div>
+  </section>
+
+  <!-- ══ WALL OF NAMES ══ -->
+  <section class="wall-section">
+    <div class="wall-inner">
+      <div class="wall-header">
+        <h2>The Wall</h2>
+        <p>Every name below represents a life. These names represent a fraction of those documented. The complete record is held by the Transgender Day of Remembrance, HRC, and the NAMES Project — thousands of names, thousands of lives.</p>
+      </div>
+      <div class="names-wall">
+        <span class="name-chip">Alan Turing</span>
+        <span class="name-chip">Oscar Wilde</span>
+        <span class="name-chip">Harvey Milk</span>
+        <span class="name-chip">Marsha P. Johnson</span>
+        <span class="name-chip">Federico García Lorca</span>
+        <span class="name-chip">Roger Casement</span>
+        <span class="name-chip">Freddie Mercury</span>
+        <span class="name-chip">Rock Hudson</span>
+        <span class="name-chip">Keith Haring</span>
+        <span class="name-chip">Robert Mapplethorpe</span>
+        <span class="name-chip">Sylvester James</span>
+        <span class="name-chip">Halston</span>
+        <span class="name-chip">Perry Ellis</span>
+        <span class="name-chip">Arthur Russell</span>
+        <span class="name-chip">David Wojnarowicz</span>
+        <span class="name-chip">Essex Hemphill</span>
+        <span class="name-chip">Paul Monette</span>
+        <span class="name-chip">Cookie Mueller</span>
+        <span class="name-chip">Matthew Shepard</span>
+        <span class="name-chip">Brandon Teena</span>
+        <span class="name-chip">Gwen Araujo</span>
+        <span class="name-chip">Sakia Gunn</span>
+        <span class="name-chip">Lawrence King</span>
+        <span class="name-chip">Angie Zapata</span>
+        <span class="name-chip">Duanna Johnson</span>
+        <span class="name-chip">Jorge Steven Lopez Mercado</span>
+        <span class="name-chip">Mark Carson</span>
+        <span class="name-chip">Islan Nettles</span>
+        <span class="name-chip">Brianna Ghey</span>
+        <span class="name-chip">Nex Benedict</span>
+        <span class="name-chip">Lamia Beard</span>
+        <span class="name-chip">Ty Underwood</span>
+        <span class="name-chip">Taja DeJesus</span>
+        <span class="name-chip">Penny Proud</span>
+        <span class="name-chip">Bri Golec</span>
+        <span class="name-chip">London Chanel</span>
+        <span class="name-chip">India Clarke</span>
+        <span class="name-chip">Shade Schuler</span>
+        <span class="name-chip">Ashton O'Hara</span>
+        <span class="name-chip">Amber Monroe</span>
+        <span class="name-chip">Kandis Capri</span>
+        <span class="name-chip">K.C. Haggard</span>
+        <span class="name-chip">Tamara Dominguez</span>
+        <span class="name-chip">Elisha Walker</span>
+        <span class="name-chip">Keisha Jenkins</span>
+        <span class="name-chip">Zella Ziona</span>
+        <span class="name-chip">Jaquarrius Holland</span>
+        <span class="name-chip">Mesha Caldwell</span>
+        <span class="name-chip">Chyna Gibson</span>
+        <span class="name-chip">Ciara McElveen</span>
+        <span class="name-chip">Muhlaysia Booker</span>
+        <span class="name-chip">Dana Martin</span>
+        <span class="name-chip">Monika Diamond</span>
+        <span class="name-chip">Dominique Fells</span>
+        <span class="name-chip">Riah Milton</span>
+        <span class="name-chip">Neulisa Luciano Ruiz</span>
+        <span class="name-chip">Juniper Blessing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DATABASE LINKS ══ -->
+  <section class="db-section">
+    <div class="db-inner">
+      <h2>The Full Record</h2>
+      <p>The names above represent a small portion of those documented. These organizations maintain comprehensive, ongoing records — together, they hold thousands of names and the evidence of a systemic crisis.</p>
+      <div class="db-grid">
+
+        <a class="db-card" href="https://tdor.info" target="_blank" rel="noopener">
+          <span class="db-card-arrow">↗</span>
+          <div class="db-card-name">Transgender Day of Remembrance</div>
+          <div class="db-card-desc">Founded 1999 by Gwendolyn Ann Smith. Documents trans people killed due to anti-trans violence worldwide, annually. Hundreds of names per year — thousands total.</div>
+        </a>
+
+        <a class="db-card" href="https://www.hrc.org/resources/fatal-violence-against-the-transgender-and-gender-non-conforming-community-in-2023" target="_blank" rel="noopener">
+          <span class="db-card-arrow">↗</span>
+          <div class="db-card-name">HRC — Fatal Anti-Transgender Violence</div>
+          <div class="db-card-desc">Annual Human Rights Campaign report documenting fatal violence against trans and gender nonconforming people in the United States, with individual names and circumstances.</div>
+        </a>
+
+        <a class="db-card" href="https://www.aidsquilt.org" target="_blank" rel="noopener">
+          <span class="db-card-arrow">↗</span>
+          <div class="db-card-name">NAMES Project — AIDS Memorial Quilt</div>
+          <div class="db-card-desc">Over 110,000 names of people lost to AIDS/HIV, displayed on hand-stitched panels. The largest piece of community folk art in the world. Searchable database available online.</div>
+        </a>
+
+        <a class="db-card" href="https://avp.org" target="_blank" rel="noopener">
+          <span class="db-card-arrow">↗</span>
+          <div class="db-card-name">Anti-Violence Project</div>
+          <div class="db-card-desc">Documents and responds to violence against LGBTQ+ and HIV-affected communities. Maintains incident data and provides direct services to survivors.</div>
+        </a>
+
+        <a class="db-card" href="https://www.glaad.org/tdor" target="_blank" rel="noopener">
+          <span class="db-card-arrow">↗</span>
+          <div class="db-card-name">GLAAD — TDOR Resources</div>
+          <div class="db-card-desc">Annual Transgender Day of Remembrance resources and coverage, including context on the epidemic of anti-trans violence.</div>
+        </a>
+
+        <a class="db-card" href="https://www.matthewshepard.org" target="_blank" rel="noopener">
+          <span class="db-card-arrow">↗</span>
+          <div class="db-card-name">Matthew Shepard Foundation</div>
+          <div class="db-card-desc">Founded by Dennis and Judy Shepard after the murder of their son Matthew in 1998. Works to replace hate with understanding, compassion, and acceptance.</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Crisis strip -->
+  <div class="crisis-strip">
+    <strong>If you are in crisis:</strong> &nbsp;
+    Trans Lifeline: <a href="tel:8775658860">877-565-8860</a> &nbsp;·&nbsp;
+    The Trevor Project: <a href="tel:18664887386">1-866-488-7386</a> &nbsp;·&nbsp;
+    Crisis Text Line: text HOME to <a href="sms:741741">741741</a> &nbsp;·&nbsp;
+    988 Suicide &amp; Crisis Lifeline: <a href="tel:988">988</a>
+  </div>
+
+  <footer>
+    <p>🪻 Lavender Lifeline Archive &nbsp;|&nbsp; <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">GitHub</a> &nbsp;|&nbsp; <a href="mailto:contact@lavenderlifelinearchive.org">contact@lavenderlifelinearchive.org</a> &nbsp;|&nbsp; The lavender fields are being sown.</p>
+    <p style="margin-top:0.4rem;font-size:11px;color:#bbb;">Preserving transgender healthcare research &amp; HIV/AIDS medical literature</p>
+  </footer>
+  <div class="trans-bar" aria-hidden="true"><span style="background:var(--trans-blue)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-white)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-blue)"></span></div>
+  <div class="pride-bar" aria-hidden="true"><span style="background:var(--pride-red)"></span><span style="background:var(--pride-orange)"></span><span style="background:var(--pride-yellow)"></span><span style="background:var(--pride-green)"></span><span style="background:var(--pride-blue)"></span><span style="background:var(--pride-purple)"></span></div>
+  <script src="nav.js"></script>
+</body>
+</html>
