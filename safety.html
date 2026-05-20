@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Safety — Lavender Lifeline Archive</title>
+  <meta name="description" content="LGBTQ+ and transgender travel safety information by U.S. state and country, sourced from the Movement Advancement Project, ILGA World, and the U.S. State Department."/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --lav-50:  #f5f0ff;
+      --lav-100: #e8d5ff;
+      --lav-200: #d4b0ff;
+      --lav-400: #a855f7;
+      --lav-600: #7c3aed;
+      --lav-800: #4c1d95;
+      --trans-blue:  #55cdfc;
+      --trans-pink:  #f7a8b8;
+      --trans-white: #ffffff;
+      --pride-red:    #e40303;
+      --pride-orange: #ff8c00;
+      --pride-yellow: #ffed00;
+      --pride-green:  #008026;
+      --pride-blue:   #004dff;
+      --pride-purple: #750787;
+      --text:      #1a1a2e;
+      --text-mid:  #555;
+      --text-soft: #777;
+      --green-bg:  #f0fdf4; --green-border: #bbf7d0; --green-text: #166534;
+      --amber-bg:  #fffbeb; --amber-border: #fde68a; --amber-text: #92400e;
+      --red-bg:    #fff1f2; --red-border:   #fecdd3; --red-text:   #be123c;
+      --dark-bg:   #fee2e2; --dark-border:  #fca5a5; --dark-text:  #7f1d1d;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px; line-height: 1.7; color: var(--text); background: #fff;
+    }
+
+    /* ── Pride & Trans bars ── */
+    .pride-bar { height: 6px; display: flex; }
+    .pride-bar span, .trans-bar span { flex: 1; }
+    .trans-bar { height: 4px; display: flex; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.875rem 2rem;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--lav-100);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 15px; font-weight: 600; color: var(--lav-800); text-decoration: none;
+    }
+    .nav-logo .flower {
+      width: 30px; height: 30px; background: var(--lav-100); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 17px;
+    }
+    .nav-links-desktop { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links-desktop a {
+      font-size: 13px; color: var(--lav-600); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .nav-links-desktop a:hover, .nav-links-desktop a.nav-active { color: var(--lav-800); font-weight: 700; }
+    .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;padding:6px;background:none;border:none;cursor:pointer;border-radius:8px;transition:background 0.15s;z-index:300;}
+    .nav-toggle:hover{background:var(--lav-50);}
+    .nav-toggle span{display:block;height:2px;border-radius:2px;background:var(--lav-800);transition:transform 0.25s,opacity 0.25s;}
+    .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+    .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:150;opacity:0;transition:opacity 0.25s;}
+    .nav-overlay.open{opacity:1;}
+    .nav-drawer{position:fixed;top:0;right:0;bottom:0;width:min(280px,80vw);background:#fff;z-index:200;transform:translateX(100%);transition:transform 0.28s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;border-left:1px solid var(--lav-100);padding:5rem 0 2rem;overflow-y:auto;}
+    .nav-drawer.open{transform:translateX(0);}
+    .nav-drawer a{display:block;padding:0.85rem 2rem;font-size:15px;font-weight:500;color:var(--lav-600);text-decoration:none;border-bottom:0.5px solid var(--lav-50);transition:background 0.15s,color 0.15s;}
+    .nav-drawer a:hover{background:var(--lav-50);color:var(--lav-800);}
+    .nav-drawer a.nav-active{color:var(--lav-800);font-weight:700;background:var(--lav-50);border-left:3px solid var(--lav-400);}
+    .nav-drawer-footer{margin-top:auto;padding:1.5rem 2rem;font-size:11px;color:var(--text-soft);line-height:1.7;}
+
+    /* ── Hero ── */
+    .hero {
+      padding: 4rem 2rem 3.5rem; text-align: center;
+      background: linear-gradient(160deg, var(--lav-50) 0%, #fff5fb 50%, #f0f9ff 100%);
+    }
+    .hero-badge {
+      display: inline-block; background: var(--lav-100); color: var(--lav-800);
+      font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 20px;
+      margin-bottom: 1.25rem; letter-spacing: 0.07em; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 700;
+      color: var(--lav-800); line-height: 1.2; margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--lav-600); }
+    .hero-sub {
+      font-size: 1rem; color: var(--text-mid);
+      max-width: 560px; margin: 0 auto; line-height: 1.8;
+    }
+
+    /* ── Disclaimer banner ── */
+    .disclaimer-banner {
+      background: var(--amber-bg); border-bottom: 1px solid var(--amber-border);
+      padding: 0.9rem 2rem; font-size: 13px; color: var(--amber-text);
+      line-height: 1.6; text-align: center;
+    }
+    .disclaimer-banner a { color: var(--amber-text); font-weight: 600; }
+
+    /* ── Sources strip ── */
+    .sources-strip {
+      background: var(--lav-50); border-bottom: 1px solid var(--lav-100);
+      padding: 0.6rem 2rem; font-size: 11px; color: var(--text-soft);
+      display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center;
+    }
+    .sources-strip a { color: var(--lav-600); text-decoration: none; font-weight: 500; }
+    .sources-strip a:hover { text-decoration: underline; }
+    .sources-strip .sep { color: var(--lav-200); }
+
+    /* ── Safety sections ── */
+    .safety-section { padding: 3.5rem 2rem; border-bottom: 0.5px solid var(--lav-100); }
+    .safety-section.alt { background: var(--lav-50); }
+    .safety-inner { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--lav-400); margin-bottom: 0.4rem;
+    }
+    .safety-section h2 {
+      font-size: 1.5rem; font-weight: 700; color: var(--lav-800);
+      margin-bottom: 0.85rem; line-height: 1.3;
+    }
+    .safety-section p { font-size: 0.925rem; color: var(--text-mid); line-height: 1.8; margin-bottom: 1rem; }
+    .safety-section a { color: var(--lav-600); }
+
+    /* ── Map CTA buttons ── */
+    .map-cta-row {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0;
+    }
+    .map-cta-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: #fff; border: 1px solid var(--lav-100); border-radius: 12px;
+      padding: 0.85rem 1.1rem; text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      flex: 1; min-width: 220px;
+    }
+    .map-cta-btn:hover {
+      border-color: var(--lav-400); box-shadow: 0 2px 10px rgba(168,85,247,0.08);
+    }
+    .map-cta-icon { font-size: 20px; flex-shrink: 0; }
+    .map-cta-title { font-size: 13px; font-weight: 700; color: var(--lav-800); }
+    .map-cta-desc { font-size: 11px; color: var(--text-soft); margin-top: 1px; line-height: 1.4; }
+    .map-cta-arrow { margin-left: auto; font-size: 14px; color: var(--lav-200); flex-shrink: 0; }
+    .map-cta-btn:hover .map-cta-arrow { color: var(--lav-400); }
+
+    /* ── Legend ── */
+    .legend-row {
+      display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;
+      padding: 0.75rem 0; border-top: 1px solid var(--lav-100); border-bottom: 1px solid var(--lav-100);
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-mid); }
+    .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+    .dot-protective { background: #22c55e; }
+    .dot-mixed      { background: #f59e0b; }
+    .dot-restrictive{ background: #f43f5e; }
+    .dot-extreme    { background: #7f1d1d; }
+
+    /* ── Tier blocks ── */
+    .tier { margin-bottom: 1.25rem; border: 1px solid var(--lav-100); border-radius: 12px; overflow: hidden; background: #fff; }
+    .tier-header {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 1rem 1.25rem;
+    }
+    .tier-header.protective { background: var(--green-bg); border-bottom: 1px solid var(--green-border); }
+    .tier-header.mixed      { background: var(--amber-bg); border-bottom: 1px solid var(--amber-border); }
+    .tier-header.restrictive{ background: var(--red-bg);   border-bottom: 1px solid var(--red-border); }
+    .tier-header.criminalized{ background: #fef2f2; border-bottom: 1px solid #fca5a5; }
+    .tier-header.extreme    { background: #fee2e2; border-bottom: 1px solid #f87171; }
+    .tier-icon {
+      width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; margin-top: 1px;
+    }
+    .protective .tier-icon  { background: var(--green-border); color: var(--green-text); }
+    .mixed .tier-icon       { background: var(--amber-border); color: var(--amber-text); }
+    .restrictive .tier-icon { background: var(--red-border);   color: var(--red-text); }
+    .criminalized .tier-icon{ background: #fca5a5; color: #991b1b; }
+    .extreme .tier-icon     { background: #f87171; color: #7f1d1d; }
+    .tier-title {
+      font-size: 13px; font-weight: 700; line-height: 1.3;
+    }
+    .protective .tier-title  { color: var(--green-text); }
+    .mixed .tier-title       { color: var(--amber-text); }
+    .restrictive .tier-title { color: var(--red-text); }
+    .criminalized .tier-title{ color: #991b1b; }
+    .extreme .tier-title     { color: #7f1d1d; }
+    .tier-subtitle { font-size: 11px; color: var(--text-soft); margin-top: 3px; line-height: 1.5; }
+
+    /* ── State chips ── */
+    .state-grid {
+      display: flex; flex-wrap: wrap; gap: 6px; padding: 1rem 1.25rem;
+    }
+    .state-chip {
+      width: 44px; height: 44px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.03em;
+      cursor: default; user-select: none;
+      transition: transform 0.1s;
+    }
+    .state-chip:hover { transform: scale(1.08); }
+    .chip-protective { background: var(--green-bg); color: var(--green-text); border: 1.5px solid var(--green-border); }
+    .chip-mixed      { background: var(--amber-bg); color: var(--amber-text); border: 1.5px solid var(--amber-border); }
+    .chip-restrictive{ background: var(--red-bg);   color: var(--red-text);   border: 1.5px solid var(--red-border); }
+
+    /* ── Country chips ── */
+    .country-grid {
+      display: flex; flex-wrap: wrap; gap: 6px; padding: 1rem 1.25rem;
+    }
+    .country-chip {
+      padding: 5px 12px; border-radius: 20px;
+      font-size: 12px; font-weight: 500;
+    }
+    .chip-extreme     { background: var(--dark-bg); color: var(--dark-text); border: 1px solid var(--dark-border); }
+
+    /* ── Region breakdown ── */
+    .region-breakdown { display: flex; flex-direction: column; gap: 0; }
+    .region-block {
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid #fef2f2;
+    }
+    .region-block:last-child { border-bottom: none; }
+    .region-name {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: #991b1b; margin-bottom: 0.35rem;
+    }
+    .region-countries { font-size: 12px; color: var(--text-mid); line-height: 1.7; }
+
+    /* ── Marriage equality list ── */
+    .equality-grid {
+      display: flex; flex-wrap: wrap; gap: 6px; padding: 1rem 1.25rem;
+    }
+    .eq-chip {
+      padding: 4px 11px; border-radius: 20px; font-size: 12px; font-weight: 500;
+      background: var(--green-bg); color: var(--green-text); border: 1px solid var(--green-border);
+    }
+
+    /* ── Source attribution ── */
+    .source-attr {
+      font-size: 11px; color: var(--text-soft); line-height: 1.6;
+      padding: 0.75rem 0; border-top: 1px solid var(--lav-100); margin-top: 0.75rem;
+    }
+    .source-attr a { color: var(--lav-600); }
+
+    /* ── Travel resource cards ── */
+    .travel-resources-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.85rem; margin-top: 1.25rem;
+    }
+    .travel-card {
+      background: #fff; border: 1px solid var(--lav-100); border-radius: 12px;
+      padding: 1.1rem 1.25rem; text-decoration: none; display: flex;
+      flex-direction: column; gap: 0.45rem;
+      transition: border-color 0.15s, box-shadow 0.15s; position: relative;
+    }
+    .travel-card:hover {
+      border-color: var(--lav-400); box-shadow: 0 2px 12px rgba(168,85,247,0.08);
+    }
+    .travel-card-top { display: flex; align-items: center; gap: 9px; }
+    .travel-card-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;
+    }
+    .travel-card-name { font-size: 13px; font-weight: 700; color: var(--lav-800); }
+    .travel-card-desc { font-size: 12px; color: var(--text-mid); line-height: 1.6; }
+    .travel-card-arrow {
+      position: absolute; top: 1rem; right: 1rem;
+      font-size: 11px; color: var(--lav-200); transition: color 0.15s;
+    }
+    .travel-card:hover .travel-card-arrow { color: var(--lav-400); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 1.75rem 2rem; text-align: center;
+      font-size: 12px; color: #999;
+      border-top: 0.5px solid var(--lav-100); line-height: 2;
+    }
+    footer a { color: var(--lav-400); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      nav { padding: 0.75rem 1rem; }
+      .nav-links-desktop { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-overlay { display: block; pointer-events: none; }
+      .nav-overlay.open { pointer-events: all; }
+      .safety-section { padding: 2.5rem 1rem; }
+      .hero { padding: 3rem 1.25rem 2.5rem; }
+      .map-cta-btn { min-width: 100%; }
+      .state-chip { width: 38px; height: 38px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pride-bar" aria-hidden="true"><span style="background:var(--pride-red)"></span><span style="background:var(--pride-orange)"></span><span style="background:var(--pride-yellow)"></span><span style="background:var(--pride-green)"></span><span style="background:var(--pride-blue)"></span><span style="background:var(--pride-purple)"></span></div>
+  <div class="trans-bar" aria-hidden="true"><span style="background:var(--trans-blue)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-white)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-blue)"></span></div>
+  <div class="nav-overlay" id="nav-overlay"></div>
+  <nav>
+    <a href="index.html" class="nav-logo"><div class="flower">🪻</div>Lavender Lifeline Archive</a>
+    <ul class="nav-links-desktop">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="archive.html">Archive</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="index.html">🏠&nbsp; Home</a>
+    <a href="archive.html">🗂️&nbsp; Archive</a>
+    <a href="resources.html">🫂&nbsp; Find Care</a>
+    <a href="safety.html">🛡️&nbsp; Travel Safety</a>
+    <a href="about.html">🪻&nbsp; About</a>
+    <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">⌥&nbsp; GitHub</a>
+    <div class="nav-drawer-footer">Lavender Lifeline Archive<br>The lavender fields are being sown.</div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">Travel Safety</div>
+    <h1>LGBTQ+ &amp; Trans <span>Travel Safety</span></h1>
+    <p class="hero-sub">Legal and safety information by U.S. state and country, sourced from the Movement Advancement Project, ILGA World, and the U.S. State Department.</p>
+  </section>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer-banner">
+    <strong>Informational purposes only.</strong> This page does not constitute legal or travel advice. Laws and enforcement conditions change rapidly — always verify current information before traveling. In an emergency abroad, contact your country's nearest embassy or consulate. Data reflects 2024 reporting.
+  </div>
+
+  <!-- Sources -->
+  <div class="sources-strip">
+    <span>Sources:</span>
+    <a href="https://www.lgbtmap.org/equality-maps" target="_blank" rel="noopener">Movement Advancement Project</a>
+    <span class="sep">·</span>
+    <a href="https://ilga.org" target="_blank" rel="noopener">ILGA World</a>
+    <span class="sep">·</span>
+    <a href="https://www.equaldex.com" target="_blank" rel="noopener">Equaldex</a>
+    <span class="sep">·</span>
+    <a href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/travelers-with-special-considerations/lgbtqi.html" target="_blank" rel="noopener">U.S. State Department</a>
+    <span class="sep">·</span>
+    <span>Verify current status before travel.</span>
+  </div>
+
+  <!-- ══ US SECTION ══ -->
+  <section class="safety-section" id="us">
+    <div class="safety-inner">
+      <div class="section-label">United States</div>
+      <h2>By State</h2>
+      <p>State-level legal protections for LGBTQ+ and transgender people vary significantly across the United States. The categories below reflect the general policy environment as assessed by the <a href="https://www.lgbtmap.org" target="_blank" rel="noopener">Movement Advancement Project (MAP)</a>, which tracks non-discrimination protections in employment, housing, and public accommodations, as well as healthcare access and youth policies. <strong>Laws change — verify current status with MAP before traveling.</strong></p>
+      <p>Note that local ordinances in some cities and counties may offer stronger protections than the surrounding state. The Bostock v. Clayton County (2020) Supreme Court decision extended federal employment non-discrimination protections to LGBTQ+ workers in all states under Title VII, though gaps in housing, healthcare, and public accommodations remain in many jurisdictions.</p>
+
+      <div class="map-cta-row">
+        <a href="https://www.lgbtmap.org/equality-maps" class="map-cta-btn" target="_blank" rel="noopener">
+          <span class="map-cta-icon">🗺️</span>
+          <div>
+            <div class="map-cta-title">MAP Interactive State Tracker</div>
+            <div class="map-cta-desc">Current, detailed policy data for all 50 states and D.C.</div>
+          </div>
+          <span class="map-cta-arrow">↗</span>
+        </a>
+        <a href="https://www.equaldex.com/region/united-states" class="map-cta-btn" target="_blank" rel="noopener">
+          <span class="map-cta-icon">📊</span>
+          <div>
+            <div class="map-cta-title">Equaldex — U.S. State Map</div>
+            <div class="map-cta-desc">Interactive map of LGBTQ+ rights by state with detailed breakdowns.</div>
+          </div>
+          <span class="map-cta-arrow">↗</span>
+        </a>
+        <a href="https://www.aclu.org/legislative-attacks-on-lgbtq-rights" class="map-cta-btn" target="_blank" rel="noopener">
+          <span class="map-cta-icon">⚖️</span>
+          <div>
+            <div class="map-cta-title">ACLU Legislative Tracker</div>
+            <div class="map-cta-desc">Tracks anti-LGBTQ+ legislation introduced and passed by state.</div>
+          </div>
+          <span class="map-cta-arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-item"><span class="legend-dot dot-protective"></span> Protective — Explicit comprehensive protections</div>
+        <div class="legend-item"><span class="legend-dot dot-mixed"></span> Mixed — Partial or inconsistent protections</div>
+        <div class="legend-item"><span class="legend-dot dot-restrictive"></span> Restrictive — No explicit protections or active restrictions</div>
+      </div>
+
+      <!-- Protective -->
+      <div class="tier">
+        <div class="tier-header protective">
+          <div class="tier-icon">✓</div>
+          <div>
+            <div class="tier-title">Protective — 19 states + D.C.</div>
+            <div class="tier-subtitle">Explicit non-discrimination protections for sexual orientation and gender identity in employment, housing, and public accommodations. Generally supportive healthcare and youth policies. Source: MAP Policy Tally, 2024.</div>
+          </div>
+        </div>
+        <div class="state-grid">
+          <span class="state-chip chip-protective" title="California">CA</span>
+          <span class="state-chip chip-protective" title="Colorado">CO</span>
+          <span class="state-chip chip-protective" title="Connecticut">CT</span>
+          <span class="state-chip chip-protective" title="Delaware">DE</span>
+          <span class="state-chip chip-protective" title="Washington D.C.">DC</span>
+          <span class="state-chip chip-protective" title="Hawaii">HI</span>
+          <span class="state-chip chip-protective" title="Illinois">IL</span>
+          <span class="state-chip chip-protective" title="Maine">ME</span>
+          <span class="state-chip chip-protective" title="Maryland">MD</span>
+          <span class="state-chip chip-protective" title="Massachusetts">MA</span>
+          <span class="state-chip chip-protective" title="Minnesota">MN</span>
+          <span class="state-chip chip-protective" title="Nevada">NV</span>
+          <span class="state-chip chip-protective" title="New Jersey">NJ</span>
+          <span class="state-chip chip-protective" title="New Mexico">NM</span>
+          <span class="state-chip chip-protective" title="New York">NY</span>
+          <span class="state-chip chip-protective" title="Oregon">OR</span>
+          <span class="state-chip chip-protective" title="Rhode Island">RI</span>
+          <span class="state-chip chip-protective" title="Vermont">VT</span>
+          <span class="state-chip chip-protective" title="Virginia">VA</span>
+          <span class="state-chip chip-protective" title="Washington">WA</span>
+        </div>
+      </div>
+
+      <!-- Mixed -->
+      <div class="tier">
+        <div class="tier-header mixed">
+          <div class="tier-icon">~</div>
+          <div>
+            <div class="tier-title">Mixed — 7 states</div>
+            <div class="tier-subtitle">Some legal protections with significant gaps, or complex and evolving policy environments. Some municipalities within these states offer stronger protections than state law. Source: MAP Policy Tally, 2024.</div>
+          </div>
+        </div>
+        <div class="state-grid">
+          <span class="state-chip chip-mixed" title="Alaska">AK</span>
+          <span class="state-chip chip-mixed" title="Arizona">AZ</span>
+          <span class="state-chip chip-mixed" title="Indiana">IN</span>
+          <span class="state-chip chip-mixed" title="Michigan">MI</span>
+          <span class="state-chip chip-mixed" title="New Hampshire">NH</span>
+          <span class="state-chip chip-mixed" title="Pennsylvania">PA</span>
+          <span class="state-chip chip-mixed" title="Wisconsin">WI</span>
+        </div>
+      </div>
+
+      <!-- Restrictive -->
+      <div class="tier">
+        <div class="tier-header restrictive">
+          <div class="tier-icon">!</div>
+          <div>
+            <div class="tier-title">Restrictive — 24 states</div>
+            <div class="tier-subtitle">No explicit state-level LGBTQ+ non-discrimination protections, or states with active legislation restricting LGBTQ+ and transgender rights including healthcare access, public accommodations, and youth participation. Source: MAP Policy Tally, 2024.</div>
+          </div>
+        </div>
+        <div class="state-grid">
+          <span class="state-chip chip-restrictive" title="Alabama">AL</span>
+          <span class="state-chip chip-restrictive" title="Arkansas">AR</span>
+          <span class="state-chip chip-restrictive" title="Florida">FL</span>
+          <span class="state-chip chip-restrictive" title="Georgia">GA</span>
+          <span class="state-chip chip-restrictive" title="Idaho">ID</span>
+          <span class="state-chip chip-restrictive" title="Iowa">IA</span>
+          <span class="state-chip chip-restrictive" title="Kansas">KS</span>
+          <span class="state-chip chip-restrictive" title="Kentucky">KY</span>
+          <span class="state-chip chip-restrictive" title="Louisiana">LA</span>
+          <span class="state-chip chip-restrictive" title="Mississippi">MS</span>
+          <span class="state-chip chip-restrictive" title="Missouri">MO</span>
+          <span class="state-chip chip-restrictive" title="Montana">MT</span>
+          <span class="state-chip chip-restrictive" title="Nebraska">NE</span>
+          <span class="state-chip chip-restrictive" title="North Carolina">NC</span>
+          <span class="state-chip chip-restrictive" title="North Dakota">ND</span>
+          <span class="state-chip chip-restrictive" title="Ohio">OH</span>
+          <span class="state-chip chip-restrictive" title="Oklahoma">OK</span>
+          <span class="state-chip chip-restrictive" title="South Carolina">SC</span>
+          <span class="state-chip chip-restrictive" title="South Dakota">SD</span>
+          <span class="state-chip chip-restrictive" title="Tennessee">TN</span>
+          <span class="state-chip chip-restrictive" title="Texas">TX</span>
+          <span class="state-chip chip-restrictive" title="Utah">UT</span>
+          <span class="state-chip chip-restrictive" title="West Virginia">WV</span>
+          <span class="state-chip chip-restrictive" title="Wyoming">WY</span>
+        </div>
+      </div>
+
+      <p class="source-attr">State categorizations based on <a href="https://www.lgbtmap.org/equality-maps" target="_blank" rel="noopener">Movement Advancement Project (MAP) Policy Tally</a>, 2024. Categories represent general state policy environment; local ordinances may provide additional protections. Laws change — verify current status at <a href="https://www.lgbtmap.org/equality-maps" target="_blank" rel="noopener">lgbtmap.org</a> before traveling. This page does not constitute legal advice.</p>
+    </div>
+  </section>
+
+  <!-- ══ INTERNATIONAL SECTION ══ -->
+  <section class="safety-section alt" id="international">
+    <div class="safety-inner">
+      <div class="section-label">International</div>
+      <h2>By Country</h2>
+      <p>Legal status of same-sex relations, gender recognition, and anti-discrimination protections varies significantly across countries. Data below is drawn from <a href="https://ilga.org/state-sponsored-homophobia-report" target="_blank" rel="noopener">ILGA World's Annual State-Sponsored Homophobia Report</a> and <a href="https://www.equaldex.com" target="_blank" rel="noopener">Equaldex</a>. Legal status does not always reflect actual enforcement or social conditions on the ground. <strong>Always consult current sources before traveling internationally.</strong></p>
+
+      <div class="map-cta-row">
+        <a href="https://ilga.org/maps-sexual-orientation-laws/" class="map-cta-btn" target="_blank" rel="noopener">
+          <span class="map-cta-icon">🗺️</span>
+          <div>
+            <div class="map-cta-title">ILGA World Criminalization Map</div>
+            <div class="map-cta-desc">Interactive world map of the legal status of same-sex intimacy by country.</div>
+          </div>
+          <span class="map-cta-arrow">↗</span>
+        </a>
+        <a href="https://ilga.org/trans-legal-mapping-report/" class="map-cta-btn" target="_blank" rel="noopener">
+          <span class="map-cta-icon">🏳️‍⚧️</span>
+          <div>
+            <div class="map-cta-title">ILGA World Trans Legal Mapping</div>
+            <div class="map-cta-desc">Country-by-country report on legal gender recognition and trans rights.</div>
+          </div>
+          <span class="map-cta-arrow">↗</span>
+        </a>
+        <a href="https://www.equaldex.com" class="map-cta-btn" target="_blank" rel="noopener">
+          <span class="map-cta-icon">📊</span>
+          <div>
+            <div class="map-cta-title">Equaldex — World Map</div>
+            <div class="map-cta-desc">Searchable, filterable database of LGBTQ+ rights by country.</div>
+          </div>
+          <span class="map-cta-arrow">↗</span>
+        </a>
+        <a href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/travelers-with-special-considerations/lgbtqi.html" class="map-cta-btn" target="_blank" rel="noopener">
+          <span class="map-cta-icon">🏛️</span>
+          <div>
+            <div class="map-cta-title">U.S. State Dept — LGBTQI+ Travel</div>
+            <div class="map-cta-desc">Official U.S. government travel information and country-specific advisories.</div>
+          </div>
+          <span class="map-cta-arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="legend-row">
+        <div class="legend-item"><span class="legend-dot dot-protective"></span> Marriage equality recognized</div>
+        <div class="legend-item"><span class="legend-dot dot-restrictive"></span> Same-sex relations criminalized</div>
+        <div class="legend-item"><span class="legend-dot dot-extreme"></span> Death penalty possible</div>
+      </div>
+
+      <!-- Death penalty -->
+      <div class="tier" style="margin-bottom:1.25rem;">
+        <div class="tier-header extreme">
+          <div class="tier-icon">!</div>
+          <div>
+            <div class="tier-title">Death Penalty Possible for Same-Sex Intimacy</div>
+            <div class="tier-subtitle">Countries where the death penalty is applicable under national or regional law for same-sex intimacy between consenting adults. Source: ILGA World State-Sponsored Homophobia Report, 2023.</div>
+          </div>
+        </div>
+        <div class="country-grid">
+          <span class="country-chip chip-extreme">Afghanistan</span>
+          <span class="country-chip chip-extreme">Brunei</span>
+          <span class="country-chip chip-extreme">Iran</span>
+          <span class="country-chip chip-extreme">Mauritania</span>
+          <span class="country-chip chip-extreme">Nigeria (northern states)</span>
+          <span class="country-chip chip-extreme">Qatar</span>
+          <span class="country-chip chip-extreme">Saudi Arabia</span>
+          <span class="country-chip chip-extreme">United Arab Emirates</span>
+          <span class="country-chip chip-extreme">Yemen</span>
+        </div>
+        <p class="source-attr" style="margin:0;padding:0.75rem 1.25rem;border-top:1px solid #fca5a5;">Source: <a href="https://ilga.org/state-sponsored-homophobia-report" target="_blank" rel="noopener">ILGA World State-Sponsored Homophobia Report, 2023</a>. Conditions vary and enforcement may differ from written law. Consult ILGA World for complete and current data.</p>
+      </div>
+
+      <!-- Criminalized — by region -->
+      <div class="tier" style="margin-bottom:1.25rem;">
+        <div class="tier-header criminalized">
+          <div class="tier-icon">✕</div>
+          <div>
+            <div class="tier-title">Same-Sex Intimacy Criminalized — approximately 60+ countries</div>
+            <div class="tier-subtitle">Countries where same-sex intimacy between consenting adults is illegal under national law. Selected examples by region are shown below — see ILGA World for the complete list. Countries in the death penalty category above are also included in this group.</div>
+          </div>
+        </div>
+        <div class="region-breakdown">
+          <div class="region-block">
+            <div class="region-name">Middle East &amp; North Africa</div>
+            <div class="region-countries">Algeria, Egypt, Iran, Iraq, Kuwait, Lebanon, Libya, Mauritania, Morocco, Oman, Qatar, Saudi Arabia, Syria, Tunisia, United Arab Emirates, Yemen</div>
+          </div>
+          <div class="region-block">
+            <div class="region-name">Sub-Saharan Africa</div>
+            <div class="region-countries">Burundi, Cameroon, Chad, Comoros, Eritrea, Ethiopia, Gambia, Ghana, Kenya, Malawi, Nigeria, Senegal, Sierra Leone, Somalia, Sudan, Tanzania, Uganda, Zimbabwe</div>
+          </div>
+          <div class="region-block">
+            <div class="region-name">Asia-Pacific</div>
+            <div class="region-countries">Afghanistan, Bangladesh, Bhutan, Brunei, Malaysia, Myanmar, Pakistan, Papua New Guinea, Sri Lanka, Tonga</div>
+          </div>
+          <div class="region-block">
+            <div class="region-name">Caribbean</div>
+            <div class="region-countries">Dominica, Grenada, Guyana, Jamaica, St. Lucia, St. Vincent &amp; the Grenadines</div>
+          </div>
+        </div>
+        <p class="source-attr" style="margin:0;padding:0.75rem 1.25rem;border-top:1px solid #fca5a5;">Source: <a href="https://ilga.org/state-sponsored-homophobia-report" target="_blank" rel="noopener">ILGA World State-Sponsored Homophobia Report, 2023</a>. This list is not exhaustive — consult ILGA World for the complete, current list. Legal status does not always reflect enforcement or social conditions. Some countries shown may have enacted changes after the report date.</p>
+      </div>
+
+      <!-- Marriage equality -->
+      <div class="tier">
+        <div class="tier-header protective">
+          <div class="tier-icon">✓</div>
+          <div>
+            <div class="tier-title">Marriage Equality Recognized — 35+ countries</div>
+            <div class="tier-subtitle">Countries where same-sex marriage is legally recognized nationwide as of 2024. Legal recognition of marriage does not guarantee full social acceptance or equal enforcement of rights in all contexts. Source: ILGA World; Equaldex, 2024.</div>
+          </div>
+        </div>
+        <div class="equality-grid">
+          <span class="eq-chip">Andorra</span>
+          <span class="eq-chip">Argentina</span>
+          <span class="eq-chip">Australia</span>
+          <span class="eq-chip">Austria</span>
+          <span class="eq-chip">Belgium</span>
+          <span class="eq-chip">Brazil</span>
+          <span class="eq-chip">Canada</span>
+          <span class="eq-chip">Chile</span>
+          <span class="eq-chip">Colombia</span>
+          <span class="eq-chip">Costa Rica</span>
+          <span class="eq-chip">Cuba</span>
+          <span class="eq-chip">Denmark</span>
+          <span class="eq-chip">Ecuador</span>
+          <span class="eq-chip">Estonia</span>
+          <span class="eq-chip">Finland</span>
+          <span class="eq-chip">France</span>
+          <span class="eq-chip">Germany</span>
+          <span class="eq-chip">Greece</span>
+          <span class="eq-chip">Iceland</span>
+          <span class="eq-chip">Ireland</span>
+          <span class="eq-chip">Latvia</span>
+          <span class="eq-chip">Luxembourg</span>
+          <span class="eq-chip">Malta</span>
+          <span class="eq-chip">Mexico</span>
+          <span class="eq-chip">Netherlands</span>
+          <span class="eq-chip">New Zealand</span>
+          <span class="eq-chip">Norway</span>
+          <span class="eq-chip">Portugal</span>
+          <span class="eq-chip">Slovenia</span>
+          <span class="eq-chip">South Africa</span>
+          <span class="eq-chip">Spain</span>
+          <span class="eq-chip">Sweden</span>
+          <span class="eq-chip">Switzerland</span>
+          <span class="eq-chip">Taiwan</span>
+          <span class="eq-chip">United Kingdom</span>
+          <span class="eq-chip">United States</span>
+          <span class="eq-chip">Uruguay</span>
+        </div>
+        <p class="source-attr">Source: <a href="https://ilga.org" target="_blank" rel="noopener">ILGA World</a>, <a href="https://www.equaldex.com" target="_blank" rel="noopener">Equaldex</a>, 2024. This list may not reflect all recent changes — verify with Equaldex for current status.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ TRAVEL RESOURCES ══ -->
+  <section class="safety-section" id="travel-resources">
+    <div class="safety-inner">
+      <div class="section-label">Resources</div>
+      <h2>Key Organizations for LGBTQ+ Travelers</h2>
+      <p>Organizations providing safety information, travel resources, and emergency support for LGBTQ+ and transgender travelers.</p>
+
+      <div class="travel-resources-grid">
+
+        <a class="travel-card" href="https://www.rainbowrailroad.org" target="_blank" rel="noopener">
+          <span class="travel-card-arrow">↗</span>
+          <div class="travel-card-top">
+            <div class="travel-card-icon" style="background:#fff1f2;">🚂</div>
+            <div class="travel-card-name">Rainbow Railroad</div>
+          </div>
+          <div class="travel-card-desc">Helps LGBTQ+ people escape state-sponsored violence and persecution. Emergency relocation assistance for people in countries where they face violence or imprisonment.</div>
+        </a>
+
+        <a class="travel-card" href="https://www.iglta.org/find-lgbtq-friendly-travel-businesses" target="_blank" rel="noopener">
+          <span class="travel-card-arrow">↗</span>
+          <div class="travel-card-top">
+            <div class="travel-card-icon" style="background:#f5f0ff;">✈️</div>
+            <div class="travel-card-name">IGLTA — LGBTQ+ Travel Association</div>
+          </div>
+          <div class="travel-card-desc">International Gay &amp; Lesbian Travel Association. Directory of LGBTQ+-welcoming hotels, tour operators, and travel businesses worldwide.</div>
+        </a>
+
+        <a class="travel-card" href="https://ilga.org/state-sponsored-homophobia-report" target="_blank" rel="noopener">
+          <span class="travel-card-arrow">↗</span>
+          <div class="travel-card-top">
+            <div class="travel-card-icon" style="background:#f0f9ff;">📋</div>
+            <div class="travel-card-name">ILGA World Annual Report</div>
+          </div>
+          <div class="travel-card-desc">ILGA World's State-Sponsored Homophobia Report — the comprehensive reference for legal status of LGBTQ+ people in every country, updated annually. Free to download.</div>
+        </a>
+
+        <a class="travel-card" href="https://ilga.org/trans-legal-mapping-report/" target="_blank" rel="noopener">
+          <span class="travel-card-arrow">↗</span>
+          <div class="travel-card-top">
+            <div class="travel-card-icon" style="background:#f5f0ff;">🏳️‍⚧️</div>
+            <div class="travel-card-name">ILGA World Trans Legal Mapping</div>
+          </div>
+          <div class="travel-card-desc">Country-by-country analysis of laws and policies affecting transgender and gender-diverse people. Covers legal gender recognition, healthcare access, and anti-discrimination laws.</div>
+        </a>
+
+        <a class="travel-card" href="https://travel.state.gov/content/travel/en/international-travel/before-you-go/travelers-with-special-considerations/lgbtqi.html" target="_blank" rel="noopener">
+          <span class="travel-card-arrow">↗</span>
+          <div class="travel-card-top">
+            <div class="travel-card-icon" style="background:#f0fff4;">🏛️</div>
+            <div class="travel-card-name">U.S. State Dept — LGBTQI+ Travel</div>
+          </div>
+          <div class="travel-card-desc">Official U.S. government guidance for LGBTQ+ travelers, including country-specific advisories, passport and document considerations, and embassy contact information.</div>
+        </a>
+
+        <a class="travel-card" href="https://www.equaldex.com" target="_blank" rel="noopener">
+          <span class="travel-card-arrow">↗</span>
+          <div class="travel-card-top">
+            <div class="travel-card-icon" style="background:#f0f9ff;">📊</div>
+            <div class="travel-card-name">Equaldex</div>
+          </div>
+          <div class="travel-card-desc">Collaborative database tracking LGBTQ+ rights by country and U.S. state. Covers marriage equality, adoption rights, anti-discrimination laws, gender recognition, and more.</div>
+        </a>
+
+      </div>
+
+      <div style="margin-top:1.25rem;font-size:12px;color:var(--text-soft);line-height:1.7;padding:0.85rem 1rem;background:var(--lav-50);border:1px solid var(--lav-100);border-radius:8px;">
+        🪻 &nbsp;<strong>Disclaimer:</strong> All information on this page is provided for general informational purposes only and does not constitute legal or travel advice. Lavender Lifeline Archive does not endorse or guarantee the accuracy of any linked resource. Laws change frequently — always verify current conditions with authoritative sources before traveling. If you or someone you know is in danger due to their sexual orientation or gender identity, contact <a href="https://www.rainbowrailroad.org" target="_blank" rel="noopener" style="color:var(--lav-600);font-weight:600;">Rainbow Railroad</a> or your country's nearest embassy.
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>🪻 Lavender Lifeline Archive &nbsp;|&nbsp; <a href="https://github.com/rileyhinkson/Lavender-Lifeline-Archive" target="_blank" rel="noopener">GitHub</a> &nbsp;|&nbsp; <a href="mailto:contact@lavenderlifelinearchive.org">contact@lavenderlifelinearchive.org</a> &nbsp;|&nbsp; The lavender fields are being sown.</p>
+    <p style="margin-top:0.4rem;font-size:11px;color:#bbb;">Preserving transgender healthcare research &amp; HIV/AIDS medical literature</p>
+  </footer>
+  <div class="trans-bar" aria-hidden="true"><span style="background:var(--trans-blue)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-white)"></span><span style="background:var(--trans-pink)"></span><span style="background:var(--trans-blue)"></span></div>
+  <div class="pride-bar" aria-hidden="true"><span style="background:var(--pride-red)"></span><span style="background:var(--pride-orange)"></span><span style="background:var(--pride-yellow)"></span><span style="background:var(--pride-green)"></span><span style="background:var(--pride-blue)"></span><span style="background:var(--pride-purple)"></span></div>
+  <script src="nav.js"></script>
+</body>
+</html>
