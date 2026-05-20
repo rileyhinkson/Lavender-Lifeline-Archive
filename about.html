@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,12 +80,12 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 17px;
     }
-    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
-    .nav-links a {
+    .nav-links-desktop { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links-desktop a {
       font-size: 13px; color: var(--lav-600); text-decoration: none;
       font-weight: 500; transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--lav-800); }
+    .nav-links-desktop a:hover, .nav-links-desktop a.nav-active { color: var(--lav-800); font-weight: 700; }
 
     /* ── Hero ── */
     .hero {
@@ -466,7 +473,7 @@
     /* ── Responsive ── */
     @media (max-width: 600px) {
       nav { padding: 0.75rem 1rem; }
-      .nav-links { gap: 1rem; }
+      .nav-links-desktop { gap: 1rem; }
       .hero { padding: 3.5rem 1.25rem 3rem; }
       .pillars { padding: 1.5rem 1rem; }
       .section { padding: 2.5rem 1.25rem; }
